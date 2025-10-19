@@ -1,23 +1,13 @@
 {
   "users": [
     {
-      "id": 1,
-      "username": "ImLunchtime",
-      "email": "knox@tmtec.top",
-      "password": "$2b$10$yU.qfXKJCpHJEDEAgZsFkeRD95zqe1TYNQFMxXiL2UliOwl7f4.oS",
-      "role": "admin",
-      "createdAt": "2025-10-19T07:36:01.824Z",
-      "lastLogin": "2025-10-19T07:42:07.696Z",
-      "isActive": true
-    },
-    {
       "id": 2,
       "username": "xtm",
       "email": "knoxmedia@yeah.net",
       "password": "$2b$10$TXHmQ7GWbUHuXtqsQqHNR.QXJWB2KQ0CW7z7.kNLjpQVFEjNqi6de",
       "role": "admin",
       "createdAt": "2025-10-19T07:42:24.358Z",
-      "lastLogin": "2025-10-19T07:42:43.972Z",
+      "lastLogin": "2025-10-19T07:47:56.831Z",
       "isActive": true
     }
   ],
