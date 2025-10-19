@@ -74,13 +74,7 @@
               to="/auth"
               class="text-gray-600 hover:text-gray-900 px-3 py-1 border border-gray-300 rounded"
             >
-              登录
-            </router-link>
-            <router-link 
-              to="/auth"
-              class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded"
-            >
-              注册
+              登录/注册
             </router-link>
           </div>
         </div>

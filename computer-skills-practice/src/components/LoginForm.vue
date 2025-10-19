@@ -3,12 +3,12 @@
     <div class="max-w-md w-full space-y-8">
       <div>
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          登录您的账户
+          登录
         </h2>
         <p class="mt-2 text-center text-sm text-gray-600">
           或者
           <button @click="$emit('switch-to-register')" class="font-medium text-blue-600 hover:text-blue-500">
-            注册新账户
+            注册
           </button>
         </p>
       </div>
