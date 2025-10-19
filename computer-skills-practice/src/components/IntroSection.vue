@@ -1,6 +1,6 @@
 <template>
   <section class="py-20 px-4 bg-white w-full mb-8">
-    <div class="max-w-7xl mx-auto">
+    <div class="mx-auto">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-gray-900 mb-4">
           为什么选择我们的平台？

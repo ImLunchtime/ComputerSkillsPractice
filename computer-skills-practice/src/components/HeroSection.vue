@@ -1,6 +1,6 @@
 <template>
   <section class="bg-gray-50 py-20 px-4 w-full mb-8">
-    <div class="max-w-7xl mx-auto text-center">
+    <div class="mx-auto text-center">
       <!-- 主标题 -->
       <h1 class="text-4xl font-bold text-gray-900 mb-4">
         提升你的<span class="text-blue-600">计算机技能</span>

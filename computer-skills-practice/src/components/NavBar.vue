@@ -1,6 +1,6 @@
 <template>
   <nav class="bg-white shadow-sm border-b w-full mb-6">
-    <div class="max-w-7xl mx-auto px-4">
+    <div class="mx-auto px-4">
       <div class="flex justify-between items-center h-16">
         <!-- 品牌标识 -->
         <div class="flex items-center">
