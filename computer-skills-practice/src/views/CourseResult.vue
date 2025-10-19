@@ -144,8 +144,14 @@ const loadCourse = async (courseId) => {
       course.value = data.data.course
       completedChallenges.value = course.value.challenges?.length || 0
       
-      // 模拟完成时间（实际应该从后端获取）
-      completionTime.value = Math.floor(Math.random() * 300) + 60 // 1-5分钟随机时间
+      // 从路由查询参数获取实际完成时间
+      const queryTime = route.query.completionTime
+      if (queryTime && !isNaN(queryTime)) {
+        completionTime.value = parseInt(queryTime)
+      } else {
+        // 如果没有传递时间参数，使用默认值
+        completionTime.value = 30 // 默认30秒
+      }
     }
   } catch (error) {
     console.error('加载课程失败:', error)

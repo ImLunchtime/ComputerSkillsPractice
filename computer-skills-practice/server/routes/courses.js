@@ -140,7 +140,7 @@ router.get('/progress/all', requireAuth, (req, res) => {
   try {
     ensureDataFiles();
     const progressData = readProgressData();
-    const userId = req.session.user.id;
+    const userId = req.user.id; // 使用req.user.id而不是req.session.user.id
     const userProgress = progressData.userProgress[userId] || {};
     
     res.json({
@@ -163,7 +163,7 @@ router.get('/progress/:courseId', requireAuth, (req, res) => {
   try {
     ensureDataFiles();
     const progressData = readProgressData();
-    const userId = req.session.user.id;
+    const userId = req.user.id; // 使用req.user.id而不是req.session.user.id
     const courseProgress = progressData.userProgress[userId]?.[req.params.courseId] || {};
     
     res.json({
@@ -186,7 +186,7 @@ router.post('/progress/:courseId/:challengeId', requireAuth, (req, res) => {
   try {
     ensureDataFiles();
     const progressData = readProgressData();
-    const userId = req.session.user.id;
+    const userId = req.user.id; // 使用req.user.id而不是req.session.user.id
     const { courseId, challengeId } = req.params;
     const { completed } = req.body;
     
@@ -227,7 +227,7 @@ router.delete('/progress/:courseId', requireAuth, (req, res) => {
   try {
     ensureDataFiles();
     const progressData = readProgressData();
-    const userId = req.session.user.id;
+    const userId = req.user.id; // 使用req.user.id而不是req.session.user.id
     const { courseId } = req.params;
     
     // 删除课程进度

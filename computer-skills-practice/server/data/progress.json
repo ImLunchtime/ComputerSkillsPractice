@@ -1,3 +1,10 @@
 {
-  "userProgress": {}
+  "userProgress": {
+    "2": {
+      "click-course": {
+        "1": true,
+        "2": true
+      }
+    }
+  }
 }

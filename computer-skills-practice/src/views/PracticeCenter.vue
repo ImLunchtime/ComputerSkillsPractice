@@ -167,7 +167,7 @@ const loadCourses = async () => {
 // 加载用户进度
 const loadUserProgress = async () => {
   try {
-    const response = await fetch('/api/progress', {
+    const response = await fetch('/api/courses/progress/all', {
       credentials: 'include'
     })
     

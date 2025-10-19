@@ -64,6 +64,29 @@
           </button>
         </div>
       </div>
+
+      <!-- 成功横幅 -->
+      <div 
+        v-if="showSuccessBanner" 
+        class="fixed bottom-0 left-0 right-0 bg-green-500 text-white p-6 shadow-lg transform transition-transform duration-300 ease-in-out"
+        :class="showSuccessBanner ? 'translate-y-0' : 'translate-y-full'"
+      >
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+          <div class="flex items-center">
+            <div class="text-2xl mr-3">🎉</div>
+            <div>
+              <h3 class="text-xl font-bold">干得漂亮！</h3>
+              <p class="text-green-100">挑战完成，继续保持！</p>
+            </div>
+          </div>
+          <button 
+            @click="goToNextChallenge"
+            class="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-green-50 transition-colors"
+          >
+            {{ completedChallenges.size === course?.challenges?.length ? '完成练习' : '下一关' }}
+          </button>
+        </div>
+      </div>
     </main>
   </div>
 </template>
@@ -84,6 +107,8 @@ const course = ref(null)
 const currentChallengeIndex = ref(0)
 const completedChallenges = ref(new Set())
 const courseCompleted = ref(false)
+const showSuccessBanner = ref(false)
+const courseStartTime = ref(null)
 
 // 计算属性
 const currentChallenge = computed(() => {
@@ -119,6 +144,11 @@ const loadCourse = async (courseId) => {
       const data = await response.json()
       course.value = data.data.course
       
+      // 记录课程开始时间
+      if (!courseStartTime.value) {
+        courseStartTime.value = Date.now()
+      }
+      
       // 加载用户进度
       await loadUserProgress(courseId)
     } else {
@@ -134,7 +164,7 @@ const loadCourse = async (courseId) => {
 // 加载用户进度
 const loadUserProgress = async (courseId) => {
   try {
-    const response = await fetch(`/api/progress/${courseId}`, {
+    const response = await fetch(`/api/courses/progress/${courseId}`, {
       credentials: 'include'
     })
     
@@ -179,9 +209,12 @@ const onChallengeCompleted = async () => {
   // 标记挑战为已完成
   completedChallenges.value.add(challengeId)
   
+  // 显示成功横幅
+  showSuccessBanner.value = true
+  
   // 保存进度到后端
   try {
-    await fetch(`/api/progress/${route.params.courseId}/${challengeId}`, {
+    await fetch(`/api/courses/progress/${route.params.courseId}/${challengeId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -196,11 +229,6 @@ const onChallengeCompleted = async () => {
   // 检查是否所有挑战都完成了
   if (completedChallenges.value.size === course.value.challenges.length) {
     courseCompleted.value = true
-  } else {
-    // 移动到下一个挑战
-    setTimeout(() => {
-      findNextChallenge()
-    }, 1500) // 给用户一些时间看到完成效果
   }
 }
 
@@ -211,7 +239,27 @@ const goBack = () => {
 
 // 前往结果页面
 const goToResult = () => {
-  router.push(`/practice/${route.params.courseId}/result`)
+  // 计算实际完成时间（秒）
+  const completionTimeSeconds = courseStartTime.value ? 
+    Math.floor((Date.now() - courseStartTime.value) / 1000) : 0
+  
+  // 通过路由参数传递完成时间
+  router.push({
+    path: `/practice/${route.params.courseId}/result`,
+    query: { completionTime: completionTimeSeconds }
+  })
+}
+
+// 进入下一关
+const goToNextChallenge = () => {
+  showSuccessBanner.value = false
+  if (completedChallenges.value.size === course.value.challenges.length) {
+    // 所有挑战完成，前往结果页面
+    goToResult()
+  } else {
+    // 进入下一个挑战
+    findNextChallenge()
+  }
 }
 
 // 监听路由参数变化

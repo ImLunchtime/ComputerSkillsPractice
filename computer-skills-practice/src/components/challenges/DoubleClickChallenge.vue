@@ -100,10 +100,8 @@ const handleDoubleClick = () => {
   // 双击成功
   completed.value = true
   
-  // 通知父组件挑战完成
-  setTimeout(() => {
-    emit('challenge-completed')
-  }, 2000) // 显示完成动画2秒后通知父组件
+  // 立即通知父组件挑战完成
+  emit('challenge-completed')
 }
 
 const resetChallenge = () => {
