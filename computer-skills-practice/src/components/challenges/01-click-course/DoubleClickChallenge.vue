@@ -34,7 +34,7 @@
       
       <!-- 提示文字 -->
       <div class="mt-6 text-sm text-gray-500">
-        💡 提示：快速连续点击两次按钮（双击）
+        💡 提示：需要快速点两次按钮（双击）才能通关！
       </div>
       
       <!-- 重置按钮 -->
@@ -51,7 +51,7 @@
     <div v-else class="completion-animation">
       <div class="text-6xl mb-4 animate-bounce">🎯</div>
       <h3 class="text-2xl font-bold text-purple-600 mb-2">挑战完成！</h3>
-      <p class="text-gray-600">太棒了！你已经掌握了双击操作</p>
+      <p class="text-gray-600">不错！你已经掌握了双击操作</p>
     </div>
   </div>
 </template>
@@ -90,7 +90,7 @@ const handleSingleClick = () => {
   if (clickCount.value > 2) {
     setTimeout(() => {
       resetChallenge()
-    }, 1000)
+    }, 400)
   }
 }
 
