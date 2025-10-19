@@ -6,6 +6,7 @@ import AdminPanel from '../views/AdminPanel.vue'
 import PracticeCenter from '../views/PracticeCenter.vue'
 import CourseView from '../views/CourseView.vue'
 import CourseResult from '../views/CourseResult.vue'
+import DesignLanguage from '../views/DesignLanguage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -49,6 +50,11 @@ const router = createRouter({
       name: 'course-result',
       component: CourseResult,
       meta: { requiresAuth: true }
+    },
+    {
+      path: '/design-language',
+      name: 'design-language',
+      component: DesignLanguage
     }
   ]
 })

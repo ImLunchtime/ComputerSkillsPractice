@@ -13,12 +13,8 @@
       
       <!-- 行动按钮 -->
       <div class="flex justify-center gap-4 mb-12">
-        <button @click="startLearning" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded">
-          开始学习
-        </button>
-        <button class="border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-6 py-3 rounded">
-          了解更多
-        </button>
+        <BaseButton variant="primary" @click="startLearning">开始学习</BaseButton>
+        <BaseButton variant="secondary">了解更多</BaseButton>
       </div>
       
     </div>

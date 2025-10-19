@@ -80,12 +80,12 @@
           <div class="px-4 py-5 sm:p-6">
             <div class="flex justify-between items-center mb-6">
               <h2 class="text-xl font-semibold text-gray-900">用户管理</h2>
-              <button 
+              <BaseButton 
+                variant="primary"
                 @click="showCreateUserModal = true"
-                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
               >
                 添加用户
-              </button>
+              </BaseButton>
             </div>
 
             <!-- 用户列表 -->
@@ -143,19 +143,20 @@
                       {{ formatDate(user.createdAt) }}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <button 
+                      <BaseButton 
+                        variant="secondary"
                         @click="editUser(user)"
-                        class="text-blue-600 hover:text-blue-900 mr-3"
                       >
                         编辑
-                      </button>
-                      <button 
+                      </BaseButton>
+                      <BaseButton 
+                        variant="red"
                         @click="deleteUser(user)"
                         :disabled="user.id === currentUser?.id"
-                        class="text-red-600 hover:text-red-900 disabled:text-gray-400 disabled:cursor-not-allowed"
+                        class="ml-3"
                       >
                         删除
-                      </button>
+                      </BaseButton>
                     </td>
                   </tr>
                 </tbody>
@@ -212,19 +213,19 @@
               </div>
             </div>
             <div class="flex justify-end space-x-3 mt-6">
-              <button 
+              <BaseButton 
+                variant="secondary"
                 type="button"
                 @click="showCreateUserModal = false"
-                class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300"
               >
                 取消
-              </button>
-              <button 
+              </BaseButton>
+              <BaseButton 
+                variant="primary"
                 type="submit"
-                class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
               >
                 创建
-              </button>
+              </BaseButton>
             </div>
           </form>
         </div>
@@ -237,6 +238,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import NavBar from '../components/NavBar.vue'
+import BaseButton from '../components/BaseButton.vue'
 
 const router = useRouter()
 const users = ref([])

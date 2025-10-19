@@ -7,9 +7,9 @@
         </h2>
         <p class="mt-2 text-center text-sm text-gray-600">
           或者
-          <button @click="$emit('switch-to-register')" class="font-medium text-blue-600 hover:text-blue-500">
+          <BaseButton variant="secondary" @click="$emit('switch-to-register')" class="text-sm">
             注册
-          </button>
+          </BaseButton>
         </p>
       </div>
       <form class="mt-8 space-y-6" @submit.prevent="handleLogin">
@@ -45,14 +45,15 @@
         </div>
 
         <div>
-          <button
+          <BaseButton
             type="submit"
             :disabled="loading"
-            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            variant="primary"
+            class="w-full"
           >
             <span v-if="loading">登录中...</span>
             <span v-else>登录</span>
-          </button>
+          </BaseButton>
         </div>
       </form>
     </div>
@@ -61,6 +62,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import BaseButton from './BaseButton.vue'
 
 const emit = defineEmits(['switch-to-register', 'login-success'])
 

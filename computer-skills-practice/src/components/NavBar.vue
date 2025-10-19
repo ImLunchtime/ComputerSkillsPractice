@@ -70,12 +70,9 @@
           
           <!-- 登录注册按钮（未登录时显示） -->
           <div v-else class="flex space-x-3 ml-6">
-            <router-link 
-              to="/auth"
-              class="text-gray-600 hover:text-gray-900 px-3 py-1 border border-gray-300 rounded"
-            >
+            <BaseButton variant="primary" @click="router.push('/auth')">
               登录/注册
-            </router-link>
+            </BaseButton>
           </div>
         </div>
       </div>

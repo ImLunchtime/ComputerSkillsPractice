@@ -1,114 +1,137 @@
 <template>
   <div class="min-h-screen bg-gray-50">
     <!-- 导航栏 -->
-    <NavBar />
+    <div class="fixed top-0 left-0 right-0 z-50">
+      <NavBar />
+    </div>
     
     <!-- 主要内容 -->
-    <main class="max-w-6xl mx-auto px-4 py-8">
-      <!-- 页面标题 -->
-      <div class="text-center mb-12">
-        <h1 class="text-4xl font-bold text-gray-900 mb-4">练习中心</h1>
-        <p class="text-xl text-gray-600">选择一个课程开始你的计算机技能学习之旅</p>
-      </div>
-
-      <!-- 用户进度概览 -->
-      <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-4">学习进度</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="text-center">
-            <div class="text-3xl font-bold text-blue-600">{{ completedCourses }}</div>
-            <div class="text-gray-600">已完成课程</div>
-          </div>
-          <div class="text-center">
-            <div class="text-3xl font-bold text-green-600">{{ totalChallenges }}</div>
-            <div class="text-gray-600">完成的挑战</div>
-          </div>
-          <div class="text-center">
-            <div class="text-3xl font-bold text-purple-600">{{ Math.round(overallProgress) }}%</div>
-            <div class="text-gray-600">总体进度</div>
+    <main class="h-screen flex flex-col pt-16">
+      <!-- 数据统计区域 (1/4 高度) -->
+      <div class="h-1/4 bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-6 py-8 h-full flex items-center">
+          <div class="w-full">
+            <h1 class="text-3xl font-bold text-gray-900 mb-6 text-center">练习中心</h1>
+            <div class="grid grid-cols-2 gap-8 max-w-2xl mx-auto">
+              <!-- 完成课程数 -->
+              <div class="text-center">
+                <div class="text-4xl font-bold text-orange-500 mb-2">
+                  {{ completedCourses }} / {{ courses.length }}
+                </div>
+                <div class="text-gray-600 text-lg">完成课程</div>
+              </div>
+              <!-- 学习进度 -->
+              <div class="text-center">
+                <div class="text-4xl font-bold text-blue-600 mb-2">
+                  {{ Math.round(overallProgress) }}%
+                </div>
+                <div class="text-gray-600 text-lg">学习进度</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- 课程列表 -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- 课程时间线区域 (3/4 高度) -->
+      <div class="flex-1 relative overflow-hidden">
         <div 
-          v-for="course in courses" 
-          :key="course.id"
-          class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer"
-          @click="startCourse(course)"
+          ref="timelineContainer"
+          class="h-full overflow-x-auto overflow-y-hidden"
+          @scroll="handleScroll"
         >
-          <div class="p-6">
-            <!-- 课程图标 -->
-            <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-              <span class="text-2xl">{{ course.icon }}</span>
-            </div>
-            
-            <!-- 课程信息 -->
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ course.title }}</h3>
-            <p class="text-gray-600 mb-4">{{ course.description }}</p>
-            
-            <!-- 课程统计 -->
-            <div class="flex justify-between items-center mb-4">
-              <span class="text-sm text-gray-500">{{ course.challenges.length }} 个挑战</span>
-              <span class="text-sm text-gray-500">{{ course.difficulty }}</span>
-            </div>
-            
-            <!-- 进度条 -->
-            <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
+          <div 
+            class="relative h-full flex items-center"
+            :style="{ width: timelineWidth + 'px', minWidth: '100%' }"
+          >
+            <!-- 时间线虚线 -->
+            <div 
+              class="absolute top-1/2 transform -translate-y-1/2 h-0.5 bg-gray-300"
+              :style="{ 
+                left: '100px', 
+                right: '100px',
+                backgroundImage: 'repeating-linear-gradient(to right, #d1d5db 0, #d1d5db 10px, transparent 10px, transparent 20px)'
+              }"
+            ></div>
+
+            <!-- 课程按钮 -->
+            <div 
+              v-for="(course, index) in courses" 
+              :key="course.id"
+              class="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2"
+              :style="{ left: getCoursePosition(index) + 'px' }"
+            >
+              <!-- 正在学习的课程外圈 -->
               <div 
-                class="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                :style="{ width: getCourseProgress(course.id) + '%' }"
+                v-if="getCurrentCourseIndex() === index"
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-yellow-400 animate-pulse"
+                :class="[
+                  isHovered === course.id ? 'w-20 h-20' : 'w-16 h-16'
+                ]"
               ></div>
-            </div>
-            
-            <!-- 状态标签 -->
-            <div class="flex justify-between items-center">
-              <span 
-                v-if="getCourseProgress(course.id) === 100"
-                class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full"
-              >
-                已完成
-              </span>
-              <span 
-                v-else-if="getCourseProgress(course.id) > 0"
-                class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full"
-              >
-                进行中
-              </span>
-              <span 
-                v-else
-                class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full"
-              >
-                未开始
-              </span>
               
-              <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                {{ getCourseProgress(course.id) === 100 ? '重新练习' : '开始练习' }}
-              </button>
+              <!-- 课程按钮 -->
+              <div
+                class="course-button relative cursor-pointer transition-all duration-300 ease-out flex items-center justify-center rounded-full shadow-lg border-2 border-white"
+                :class="[
+                  getCourseButtonClass(index),
+                  isHovered === course.id ? 'w-16 h-16 transform scale-125' : 'w-12 h-12'
+                ]"
+                @mouseenter="handleMouseEnter(course.id)"
+                @mouseleave="handleMouseLeave"
+                @click="startCourse(course)"
+              >
+                <span class="text-white text-lg font-semibold">{{ course.icon }}</span>
+              </div>
+
+              <!-- 悬停时显示的课程信息 -->
+              <div 
+                v-if="isHovered === course.id"
+                class="absolute top-20 left-1/2 transform -translate-x-1/2 bg-white rounded-lg p-4 min-w-48 z-10 border border-gray-200"
+              >
+                <div class="text-center">
+                  <div class="text-2xl mb-2">{{ course.icon }}</div>
+                  <h3 class="font-semibold text-gray-900 mb-1">{{ course.title }}</h3>
+                  <div class="text-sm text-gray-600 mb-2">{{ course.description }}</div>
+                  <div class="text-xs">
+                    <span 
+                      v-if="getCourseProgress(course.id) === 100"
+                      class="bg-green-100 text-green-800 px-2 py-1 rounded-full"
+                    >
+                      已完成
+                    </span>
+                    <span 
+                      v-else
+                      class="bg-gray-100 text-gray-800 px-2 py-1 rounded-full"
+                    >
+                      未完成
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- 空状态 -->
-      <div v-if="courses.length === 0" class="text-center py-12">
-        <div class="text-gray-400 text-6xl mb-4">📚</div>
-        <h3 class="text-xl font-semibold text-gray-600 mb-2">暂无课程</h3>
-        <p class="text-gray-500">课程正在准备中，请稍后再来查看</p>
       </div>
     </main>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import NavBar from '../components/NavBar.vue'
 
 const router = useRouter()
 const courses = ref([])
 const userProgress = ref({})
+const isHovered = ref(null)
+const timelineContainer = ref(null)
+
+// 时间线相关
+const timelineWidth = computed(() => {
+  if (courses.value.length === 0) return 0
+  return Math.max(courses.value.length * 200 + 200, window.innerWidth)
+})
 
 // 计算属性
 const completedCourses = computed(() => {
@@ -143,6 +166,85 @@ const getCourseProgress = (courseId) => {
   return Math.round((completedChallenges / course.challenges.length) * 100)
 }
 
+// 获取当前正在学习的课程索引
+const getCurrentCourseIndex = () => {
+  if (courses.value.length === 0) return -1
+  if (courses.value.length === 1) return 0
+  
+  // 找到最后一个已完成的课程
+  let lastCompletedIndex = -1
+  for (let i = 0; i < courses.value.length; i++) {
+    if (getCourseProgress(courses.value[i].id) === 100) {
+      lastCompletedIndex = i
+    }
+  }
+  
+  // 返回下一个课程的索引，如果所有课程都完成了，返回最后一个
+  return Math.min(lastCompletedIndex + 1, courses.value.length - 1)
+}
+
+// 获取课程按钮的CSS类
+const getCourseButtonClass = (index) => {
+  const currentIndex = getCurrentCourseIndex()
+  const courseProgress = getCourseProgress(courses.value[index].id)
+  
+  if (index === currentIndex) {
+    // 正在学习的课程 - 亮橙色
+    return 'bg-orange-400 hover:bg-orange-500'
+  } else if (courseProgress === 100) {
+    // 已完成的课程 - 橙色
+    return 'bg-orange-500 hover:bg-orange-600'
+  } else {
+    // 未开始的课程 - 灰色
+    return 'bg-gray-400 hover:bg-gray-500'
+  }
+}
+
+// 获取课程在时间线上的位置
+const getCoursePosition = (index) => {
+  const containerWidth = timelineWidth.value
+  const totalCourses = courses.value.length
+  
+  if (totalCourses === 1) {
+    return containerWidth / 2
+  }
+  
+  const spacing = (containerWidth - 200) / (totalCourses - 1)
+  return 100 + index * spacing
+}
+
+// 鼠标悬停处理
+const handleMouseEnter = (courseId) => {
+  isHovered.value = courseId
+}
+
+const handleMouseLeave = () => {
+  isHovered.value = null
+}
+
+// 滚动处理
+const handleScroll = () => {
+  // 可以在这里添加滚动相关的逻辑
+}
+
+// 滚动到当前课程
+const scrollToCurrentCourse = async () => {
+  await nextTick()
+  if (!timelineContainer.value || courses.value.length === 0) return
+  
+  const currentIndex = getCurrentCourseIndex()
+  const coursePosition = getCoursePosition(currentIndex)
+  const containerWidth = timelineContainer.value.clientWidth
+  
+  // 计算滚动位置，使当前课程居中
+  const scrollLeft = coursePosition - containerWidth / 2
+  
+  timelineContainer.value.scrollTo({
+    left: Math.max(0, scrollLeft),
+    behavior: 'smooth'
+  })
+}
+
 // 开始课程
 const startCourse = (course) => {
   router.push(`/practice/${course.id}`)
@@ -158,6 +260,9 @@ const loadCourses = async () => {
     if (response.ok) {
       const data = await response.json()
       courses.value = data.data.courses
+      // 加载完课程后滚动到当前课程
+      await nextTick()
+      scrollToCurrentCourse()
     }
   } catch (error) {
     console.error('加载课程失败:', error)
@@ -174,6 +279,9 @@ const loadUserProgress = async () => {
     if (response.ok) {
       const data = await response.json()
       userProgress.value = data.data.progress
+      // 加载完进度后重新滚动到当前课程
+      await nextTick()
+      scrollToCurrentCourse()
     }
   } catch (error) {
     console.error('加载用户进度失败:', error)

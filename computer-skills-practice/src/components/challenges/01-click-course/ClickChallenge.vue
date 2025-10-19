@@ -7,23 +7,23 @@
       </div>
       
       <!-- 点击按钮 -->
-      <button 
+      <BaseButton 
+        variant="orange"
         @click="handleClick"
-        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-xl transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300"
-        :class="{ 'animate-pulse': isAnimating }"
       >
         点击我！
-      </button>
+      </BaseButton>
       
       <!-- 提示文字 -->
       <div class="mt-6 text-sm text-gray-500">
-        💡 提示：用鼠标左键点击按钮
+        <IconLightbulb class="text-yellow-500 inline-block mr-1" />
+        提示：用鼠标左键点击按钮
       </div>
     </div>
     
     <!-- 完成状态 -->
     <div v-else class="completion-animation">
-      <div class="text-6xl mb-4 animate-bounce">✅</div>
+      <IconTaskAlt class="text-6xl text-green-600 mb-4 animate-bounce" />
       <h3 class="text-2xl font-bold text-green-600 mb-2">挑战完成！</h3>
       <p class="text-gray-600">很好！你已经学会了如何点击按钮</p>
     </div>
@@ -31,6 +31,7 @@
 </template>
 
 <script setup>
+import { IconLightbulb, IconTaskAlt } from '@iconify-prerendered/vue-material-symbols'
 import { ref } from 'vue'
 
 const emit = defineEmits(['challenge-completed'])

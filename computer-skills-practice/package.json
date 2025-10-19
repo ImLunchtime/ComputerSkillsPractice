@@ -15,6 +15,7 @@
     "start:prod": "npm run build && node server/app.js"
   },
   "dependencies": {
+    "@iconify-prerendered/vue-material-symbols": "^0.28.1755063979",
     "@tailwindcss/vite": "^4.1.14",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",

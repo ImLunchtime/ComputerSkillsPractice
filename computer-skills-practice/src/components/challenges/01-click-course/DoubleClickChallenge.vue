@@ -7,17 +7,13 @@
       </div>
       
       <!-- 双击按钮 -->
-      <button 
+      <BaseButton 
+        variant="orange"
         @dblclick="handleDoubleClick"
         @click="handleSingleClick"
-        class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-8 rounded-lg text-xl transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-purple-300"
-        :class="{ 
-          'animate-pulse': isAnimating,
-          'bg-yellow-500 hover:bg-yellow-600': clickCount === 1 
-        }"
       >
         {{ clickCount === 0 ? '双击我！' : '再点击一次！' }}
-      </button>
+      </BaseButton>
       
       <!-- 点击计数显示 -->
       <div class="mt-4">
@@ -34,7 +30,7 @@
       
       <!-- 提示文字 -->
       <div class="mt-6 text-sm text-gray-500">
-        💡 提示：需要快速点两次按钮（双击）才能通关！
+        <IconLightbulb class="text-yellow-500 inline-block mr-1" /> 提示：需要快速点两次按钮（双击）才能通关！
       </div>
       
       <!-- 重置按钮 -->
@@ -58,6 +54,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { IconLightbulb } from '@iconify-prerendered/vue-material-symbols'
 
 const emit = defineEmits(['challenge-completed'])
 

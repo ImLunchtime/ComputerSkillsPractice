@@ -1,79 +1,21 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="h-screen bg-gray-50 overflow-hidden">
     <!-- 导航栏 -->
     <NavBar />
     
     <!-- 结算内容 -->
-    <main class="max-w-4xl mx-auto px-4 py-8">
+    <main class="px-4 py-8 text-center h-full flex flex-col justify-center">
       <!-- 庆祝动画区域 -->
-      <div class="text-center mb-12">
-        <div class="text-8xl mb-6 animate-bounce">🎉</div>
-        <h1 class="text-4xl font-bold text-gray-900 mb-4">课程完成！</h1>
-        <p class="text-xl text-gray-600">恭喜你成功完成了所有挑战</p>
+      <div class="mb-12">
+        <IconCelebration class="text-8xl text-yellow-500 mb-6 animate-bounce" />
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">练习完成！</h1>
+        <p class="text-xl text-gray-600">恭喜你成功完成了此练习</p>
       </div>
 
-      <!-- 课程信息卡片 -->
-      <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
-        <div class="flex items-center mb-6">
-          <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-            <span class="text-2xl">{{ course?.icon || '📚' }}</span>
-          </div>
-          <div>
-            <h2 class="text-2xl font-bold text-gray-900">{{ course?.title }}</h2>
-            <p class="text-gray-600">{{ course?.description }}</p>
-          </div>
-        </div>
-        
-        <!-- 完成统计 -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div class="text-center p-4 bg-green-50 rounded-lg">
-            <div class="text-3xl font-bold text-green-600">{{ completedChallenges }}</div>
-            <div class="text-green-700">完成的挑战</div>
-          </div>
-          <div class="text-center p-4 bg-blue-50 rounded-lg">
-            <div class="text-3xl font-bold text-blue-600">{{ formatTime(completionTime) }}</div>
-            <div class="text-blue-700">完成时间</div>
-          </div>
-          <div class="text-center p-4 bg-purple-50 rounded-lg">
-            <div class="text-3xl font-bold text-purple-600">100%</div>
-            <div class="text-purple-700">完成度</div>
-          </div>
-        </div>
-        
-        <!-- 进度条 -->
-        <div class="w-full bg-gray-200 rounded-full h-4 mb-4">
-          <div class="bg-green-500 h-4 rounded-full w-full transition-all duration-1000 ease-out"></div>
-        </div>
-        <div class="text-center text-sm text-gray-600">课程进度: 100%</div>
-      </div>
-
-      <!-- 挑战详情 -->
-      <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
-        <h3 class="text-xl font-bold text-gray-900 mb-6">挑战完成详情</h3>
-        <div class="space-y-4">
-          <div 
-            v-for="(challenge, index) in course?.challenges || []" 
-            :key="challenge.id"
-            class="flex items-center p-4 bg-gray-50 rounded-lg"
-          >
-            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mr-4">
-              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-              </svg>
-            </div>
-            <div class="flex-1">
-              <h4 class="font-semibold text-gray-900">挑战 {{ index + 1 }}: {{ challenge.title }}</h4>
-              <p class="text-gray-600 text-sm">{{ challenge.description }}</p>
-            </div>
-            <div class="text-green-600 font-semibold">已完成</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 奖励区域（目前为空，为将来扩展预留） -->
-      <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+      <!-- 奖励区域 -->
+      <div class="mb-8">
         <h3 class="text-xl font-bold text-gray-900 mb-6">获得奖励</h3>
-        <div class="text-center py-8">
+        <div class="py-8">
           <div class="text-6xl mb-4">🏆</div>
           <p class="text-gray-600 mb-4">目前还没有奖励系统</p>
           <p class="text-sm text-gray-500">未来版本将添加经验值、徽章等奖励机制</p>
@@ -82,24 +24,9 @@
 
       <!-- 操作按钮 -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <button 
-          @click="goToPracticeCenter"
-          class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors text-lg font-semibold"
-        >
-          返回练习中心
-        </button>
-        <button 
-          @click="retryCourse"
-          class="bg-gray-600 text-white px-8 py-3 rounded-lg hover:bg-gray-700 transition-colors text-lg font-semibold"
-        >
-          重新练习
-        </button>
-        <button 
-          @click="shareResult"
-          class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition-colors text-lg font-semibold"
-        >
-          分享成果
-        </button>
+        <BaseButton variant="primary" @click="goToPracticeCenter">返回练习中心</BaseButton>
+        <BaseButton variant="secondary" @click="retryCourse">重新练习</BaseButton>
+        <BaseButton variant="green" @click="shareResult">分享成果</BaseButton>
       </div>
     </main>
   </div>
@@ -109,6 +36,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import NavBar from '../components/NavBar.vue'
+import { IconCelebration, IconLibraryBooks } from '@iconify-prerendered/vue-material-symbols'
 
 const route = useRoute()
 const router = useRouter()

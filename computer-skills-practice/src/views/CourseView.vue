@@ -4,14 +4,13 @@
     <NavBar />
     
     <!-- 课程内容 -->
-    <main class="max-w-4xl mx-auto px-4 py-8">
+    <main class="px-4 py-8 text-center">
       <!-- 课程头部 -->
-      <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+      <div class="mb-8">
         <div class="flex items-center justify-between mb-4">
           <button 
             @click="goBack"
-            class="flex items-center text-gray-600 hover:text-gray-900"
-          >
+            class="flex items-center text-gray-600 hover:text-gray-900">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
             </svg>
@@ -19,7 +18,7 @@
           </button>
           
           <div class="text-sm text-gray-500">
-            挑战 {{ currentChallengeIndex + 1 }} / {{ course?.challenges?.length || 0 }}
+            {{ currentChallengeIndex + 1 }} / {{ course?.challenges?.length || 0 }}
           </div>
         </div>
         
@@ -27,7 +26,7 @@
         <p class="text-gray-600 mb-4">{{ course?.description }}</p>
         
         <!-- 进度条 -->
-        <div class="w-full bg-gray-200 rounded-full h-3">
+        <div class="w-full bg-gray-200 rounded-full h-3 max-w-md mx-auto">
           <div 
             class="bg-blue-600 h-3 rounded-full transition-all duration-300"
             :style="{ width: progressPercentage + '%' }"
@@ -36,13 +35,8 @@
       </div>
 
       <!-- 挑战内容 -->
-      <div class="bg-white rounded-lg shadow-md p-8 text-center">
+      <div class="py-8 border border-gray-200 rounded-lg">
         <div v-if="currentChallenge">
-          <h2 class="text-2xl font-semibold text-gray-800 mb-6">
-            {{ currentChallenge.title }}
-          </h2>
-          <p class="text-gray-600 mb-8">{{ currentChallenge.description }}</p>
-          
           <!-- 动态加载挑战组件 -->
           <Suspense>
             <component 
@@ -61,8 +55,8 @@
         
         <!-- 课程完成状态 -->
         <div v-else-if="courseCompleted" class="py-12">
-          <div class="text-6xl mb-4">🎉</div>
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">恭喜完成课程！</h2>
+          <IconCelebration class="text-6xl text-yellow-500 mb-4" />
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">恭喜完成练习！</h2>
           <p class="text-gray-600 mb-8">你已经成功完成了所有挑战</p>
           <button 
             @click="goToResult"
@@ -79,20 +73,20 @@
         class="fixed bottom-0 left-0 right-0 bg-green-500 text-white p-6 shadow-lg transform transition-transform duration-300 ease-in-out"
         :class="showSuccessBanner ? 'translate-y-0' : 'translate-y-full'"
       >
-        <div class="max-w-4xl mx-auto flex items-center justify-between">
-          <div class="flex items-center">
-            <div class="text-2xl mr-3">🎉</div>
+        <div class="flex items-center justify-center">
+          <div class="flex items-center mr-6">
+            <IconCelebration class="text-2xl text-yellow-500 mr-3" />
             <div>
               <h3 class="text-xl font-bold">干得漂亮！</h3>
               <p class="text-green-100">挑战完成，继续保持！</p>
             </div>
           </div>
-          <button 
+          <BaseButton 
+            variant="green" 
             @click="goToNextChallenge"
-            class="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-green-50 transition-colors"
           >
             {{ completedChallenges.size === course?.challenges?.length ? '完成练习' : '下一关' }}
-          </button>
+          </BaseButton>
         </div>
       </div>
     </main>
@@ -103,6 +97,7 @@
 import { ref, computed, onMounted, watch, defineAsyncComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import NavBar from '../components/NavBar.vue'
+import { IconCelebration } from '@iconify-prerendered/vue-material-symbols'
 
 const route = useRoute()
 const router = useRouter()

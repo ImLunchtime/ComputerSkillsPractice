@@ -73,25 +73,25 @@
             <div class="mt-8">
               <h3 class="text-lg font-medium text-gray-900 mb-4">快速操作</h3>
               <div class="flex flex-wrap gap-4">
-                <button 
+                <BaseButton 
+                  variant="primary"
                   @click="goToSkills"
-                  class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
                 >
                   开始学习
-                </button>
-                <button 
-                  class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm font-medium"
-                  disabled
+                </BaseButton>
+                <BaseButton 
+                  variant="secondary"
+                  :disabled="true"
                 >
                   查看证书（即将推出）
-                </button>
-                <button 
+                </BaseButton>
+                <BaseButton 
                   v-if="user?.role === 'admin'"
+                  variant="green"
                   @click="goToAdmin"
-                  class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium"
                 >
                   管理员中心
-                </button>
+                </BaseButton>
               </div>
             </div>
           </div>
@@ -105,6 +105,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import NavBar from '../components/NavBar.vue'
+import BaseButton from '../components/BaseButton.vue'
 
 const router = useRouter()
 const user = ref(null)

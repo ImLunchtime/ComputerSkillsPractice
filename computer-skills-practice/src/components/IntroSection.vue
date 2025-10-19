@@ -40,7 +40,7 @@
         <!-- 特色3 -->
         <div class="text-center p-6">
           <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-8 h-8 text紫-600" fill="currentColor" viewBox="0 0 20 20">
               <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/>
               <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/>
             </svg>
@@ -53,9 +53,7 @@
       </div>
 
       <div class="text-center mt-12">
-        <button @click="startLearning" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded">
-          立即开始学习
-        </button>
+        <BaseButton variant="primary" @click="startLearning">立即开始学习</BaseButton>
       </div>
     </div>
   </section>
