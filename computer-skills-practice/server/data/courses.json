@@ -1,0 +1,25 @@
+{
+  "courses": [
+    {
+      "id": "click-course",
+      "title": "点击",
+      "description": "学习基本的鼠标点击操作",
+      "icon": "👆",
+      "difficulty": "初级",
+      "challenges": [
+        {
+          "id": 1,
+          "title": "单击挑战",
+          "description": "点击按钮完成挑战",
+          "type": "click"
+        },
+        {
+          "id": 2,
+          "title": "双击挑战",
+          "description": "快速双击按钮完成挑战",
+          "type": "double-click"
+        }
+      ]
+    }
+  ]
+}

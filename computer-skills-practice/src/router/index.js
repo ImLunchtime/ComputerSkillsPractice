@@ -3,6 +3,9 @@ import HomeView from '../views/HomeView.vue'
 import AuthView from '../views/AuthView.vue'
 import UserProfile from '../views/UserProfile.vue'
 import AdminPanel from '../views/AdminPanel.vue'
+import PracticeCenter from '../views/PracticeCenter.vue'
+import CourseView from '../views/CourseView.vue'
+import CourseResult from '../views/CourseResult.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +31,24 @@ const router = createRouter({
       name: 'admin',
       component: AdminPanel,
       meta: { requiresAuth: true, requiresAdmin: true }
+    },
+    {
+      path: '/practice',
+      name: 'practice-center',
+      component: PracticeCenter,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/practice/:courseId',
+      name: 'course',
+      component: CourseView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/practice/:courseId/result',
+      name: 'course-result',
+      component: CourseResult,
+      meta: { requiresAuth: true }
     }
   ]
 })

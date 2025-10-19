@@ -23,14 +23,14 @@ const router = useRouter()
 const currentView = ref('login')
 
 const handleAuthSuccess = (user) => {
-  // 登录成功后跳转到主页或用户页面
+  // 登录成功后跳转到练习中心
   console.log('登录成功:', user)
   
   // 触发全局用户状态更新
   window.dispatchEvent(new CustomEvent('user-login', { detail: user }))
   
-  // 跳转到主页
-  router.push('/')
+  // 跳转到练习中心
+  router.push('/practice')
 }
 
 const handleRegisterSuccess = (user) => {

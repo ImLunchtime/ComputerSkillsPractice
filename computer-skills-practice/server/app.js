@@ -45,6 +45,7 @@ app.use(express.urlencoded({ extended: true }));
 import apiRoutes from './routes/api.js';
 import authRoutes from './routes/auth.js';
 import userRoutes from './routes/users.js';
+import courseRoutes from './routes/courses.js';
 
 // API路由
 app.get('/api/health', (req, res) => {
@@ -59,6 +60,7 @@ app.get('/api/health', (req, res) => {
 app.use('/api', apiRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/courses', courseRoutes);
 
 // 静态文件服务（用于生产环境）
 // 注意：静态文件服务应该在API路由之后，避免冲突
