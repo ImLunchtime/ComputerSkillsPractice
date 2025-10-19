@@ -9,15 +9,23 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "nodemon server/app.js",
+    "start": "concurrently \"npm run server\" \"npm run dev\"",
+    "start:prod": "npm run build && node server/app.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
     "tailwindcss": "^4.1.14",
     "vue": "^3.5.22"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.1",
+    "concurrently": "^9.2.1",
+    "nodemon": "^3.1.10",
     "vite": "^7.1.7",
     "vite-plugin-vue-devtools": "^8.0.2"
   }
