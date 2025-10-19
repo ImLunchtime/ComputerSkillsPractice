@@ -35,6 +35,7 @@ class User {
     this.createdAt = userData.createdAt || new Date().toISOString();
     this.lastLogin = userData.lastLogin || null;
     this.isActive = userData.isActive !== undefined ? userData.isActive : true;
+    this.experience = userData.experience || 0; // 用户经验值，默认为0
   }
 
   // 读取用户数据
@@ -172,6 +173,35 @@ class User {
 
       // 更新用户信息
       data.users[userIndex] = { ...data.users[userIndex], ...updateData };
+      
+      if (this.writeUsersData(data)) {
+        const { password, ...userWithoutPassword } = data.users[userIndex];
+        return userWithoutPassword;
+      } else {
+        throw new Error('保存用户数据失败');
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // 更新用户经验值
+  static updateExperience(userId, experienceToAdd) {
+    try {
+      const data = this.readUsersData();
+      const userIndex = data.users.findIndex(u => u.id === parseInt(userId));
+      
+      if (userIndex === -1) {
+        throw new Error('用户不存在');
+      }
+
+      // 确保用户有经验值字段，如果没有则初始化为0
+      if (data.users[userIndex].experience === undefined) {
+        data.users[userIndex].experience = 0;
+      }
+
+      // 增加经验值
+      data.users[userIndex].experience += experienceToAdd;
       
       if (this.writeUsersData(data)) {
         const { password, ...userWithoutPassword } = data.users[userIndex];

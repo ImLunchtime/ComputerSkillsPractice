@@ -8,10 +8,12 @@
   },
   "scripts": {
     "dev": "vite",
+    "dev:host": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
     "server": "nodemon server/app.js",
     "start": "concurrently \"npm run server\" \"npm run dev\"",
+    "start-public": "concurrently \"npm run server\" \"npm run dev:host\"",
     "start:prod": "npm run build && node server/app.js"
   },
   "dependencies": {

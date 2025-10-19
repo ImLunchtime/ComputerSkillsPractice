@@ -1,0 +1,82 @@
+// 这是一个备份文件，用于保存原始的课程完成逻辑
+// 新增课程完成奖励API
+router.post('/complete/:courseId', requireAuth, (req, res) => {
+  try {
+    ensureDataFiles();
+    const coursesData = readCoursesData();
+    const progressData = readProgressData();
+    const userId = req.user.id;
+    const { courseId } = req.params;
+    
+    // 检查课程是否存在
+    const course = coursesData.courses.find(c => c.id === courseId);
+    if (!course) {
+      return res.status(404).json({
+        status: 'error',
+        message: '课程不存在'
+      });
+    }
+    
+    // 检查用户是否已完成所有挑战
+    const userProgress = progressData.userProgress[userId]?.[courseId] || {};
+    const completedChallenges = Object.values(userProgress).filter(completed => completed).length;
+    
+    if (completedChallenges !== course.challenges.length) {
+      return res.status(400).json({
+        status: 'error',
+        message: '请先完成所有挑战'
+      });
+    }
+    
+    // 检查是否已经获得过奖励
+    if (!progressData.courseRewards) {
+      progressData.courseRewards = {};
+    }
+    if (!progressData.courseRewards[userId]) {
+      progressData.courseRewards[userId] = {};
+    }
+    
+    if (progressData.courseRewards[userId][courseId]) {
+      return res.status(400).json({
+        status: 'error',
+        message: '已经获得过此课程的奖励'
+      });
+    }
+    
+    // 奖励经验值（30XP）
+    const experienceReward = 30;
+    try {
+      const updatedUser = User.updateExperience(userId, experienceReward);
+      
+      // 记录奖励已发放
+      progressData.courseRewards[userId][courseId] = {
+        experience: experienceReward,
+        completedAt: new Date().toISOString()
+      };
+      
+      writeProgressData(progressData);
+      
+      res.json({
+        status: 'success',
+        message: '课程完成！获得奖励',
+        data: {
+          courseId,
+          experienceReward,
+          user: updatedUser
+        }
+      });
+    } catch (error) {
+      console.error('奖励经验值失败:', error);
+      res.status(500).json({
+        status: 'error',
+        message: '奖励发放失败'
+      });
+    }
+  } catch (error) {
+    console.error('完成课程失败:', error);
+    res.status(500).json({
+      status: 'error',
+      message: '完成课程失败'
+    });
+  }
+});

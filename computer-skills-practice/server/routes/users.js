@@ -160,6 +160,9 @@ router.put('/:id', requireAuth, requireAdmin, async (req, res) => {
     if (isActive !== undefined) {
       updateData.isActive = isActive;
     }
+    if (req.body.experience !== undefined) {
+      updateData.experience = parseInt(req.body.experience) || 0;
+    }
 
     // 更新用户
     const updatedUser = await User.updateUser(id, updateData);
@@ -177,6 +180,48 @@ router.put('/:id', requireAuth, requireAdmin, async (req, res) => {
     res.status(400).json({
       status: 'error',
       message: error.message || '更新用户失败'
+    });
+  }
+});
+
+// 增加用户经验值（仅认证用户）
+router.post('/:id/experience', requireAuth, (req, res) => {
+  try {
+    const { id } = req.params;
+    const { experience } = req.body;
+
+    // 验证经验值
+    if (!experience || experience <= 0) {
+      return res.status(400).json({
+        status: 'error',
+        message: '经验值必须大于0'
+      });
+    }
+
+    // 检查权限：只有管理员或用户本人可以增加经验值
+    if (req.user.role !== 'admin' && req.user.id !== parseInt(id)) {
+      return res.status(403).json({
+        status: 'error',
+        message: '没有权限操作此用户'
+      });
+    }
+
+    // 增加经验值
+    const updatedUser = User.updateExperience(id, parseInt(experience));
+
+    res.json({
+      status: 'success',
+      message: `成功增加 ${experience} 经验值`,
+      data: {
+        user: updatedUser
+      }
+    });
+
+  } catch (error) {
+    console.error('增加经验值失败:', error);
+    res.status(400).json({
+      status: 'error',
+      message: error.message || '增加经验值失败'
     });
   }
 });

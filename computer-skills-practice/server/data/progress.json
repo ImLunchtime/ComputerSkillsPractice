@@ -4,6 +4,22 @@
       "click-course": {
         "1": true,
         "2": true
+      },
+      "drag-course": {
+        "3": true,
+        "4": true
+      }
+    }
+  },
+  "courseRewards": {
+    "2": {
+      "click-course": {
+        "experience": 30,
+        "completedAt": "2025-10-19T12:31:21.966Z"
+      },
+      "drag-course": {
+        "experience": 30,
+        "completedAt": "2025-10-19T12:31:44.047Z"
       }
     }
   }

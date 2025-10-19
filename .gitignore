@@ -14,8 +14,8 @@ dist-ssr
 coverage
 *.local
 
-/cypress/videos/
-/cypress/screenshots/
+/computer-skills-practice/cypress/videos/
+/computer-skills-practice/cypress/screenshots/
 
 # Editor directories and files
 .vscode/*
@@ -30,5 +30,4 @@ coverage
 *.tsbuildinfo
 
 # Data files 
-/computer-skills-practice/server/data/progress.json
-/computer-skills-practice/server/data/users.json
+/computer-skills-practice/server/data/

@@ -103,6 +103,9 @@
                       状态
                     </th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      经验值
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       注册时间
                     </th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -138,6 +141,9 @@
                             class="inline-flex px-2 py-1 text-xs font-semibold rounded-full">
                         {{ user.isActive ? '活跃' : '禁用' }}
                       </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      {{ user.experience || 0 }} XP
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {{ formatDate(user.createdAt) }}
@@ -231,6 +237,80 @@
         </div>
       </div>
     </div>
+    <!-- 编辑用户模态框 -->
+    <div v-if="showEditUserModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+      <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div class="mt-3">
+          <h3 class="text-lg font-medium text-gray-900 mb-4">编辑用户</h3>
+          <form @submit.prevent="updateUser">
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">用户名</label>
+                <input 
+                  v-model="editingUser.username" 
+                  type="text" 
+                  required
+                  class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">邮箱</label>
+                <input 
+                  v-model="editingUser.email" 
+                  type="email" 
+                  required
+                  class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">角色</label>
+                <select 
+                  v-model="editingUser.role"
+                  class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="user">普通用户</option>
+                  <option value="admin">管理员</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">状态</label>
+                <select 
+                  v-model="editingUser.isActive"
+                  class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option :value="true">活跃</option>
+                  <option :value="false">禁用</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">经验值</label>
+                <input 
+                  v-model.number="editingUser.experience" 
+                  type="number" 
+                  min="0"
+                  class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+            </div>
+            <div class="flex justify-end space-x-3 mt-6">
+              <BaseButton 
+                variant="secondary"
+                type="button"
+                @click="showEditUserModal = false"
+              >
+                取消
+              </BaseButton>
+              <BaseButton 
+                variant="primary"
+                type="submit"
+              >
+                保存
+              </BaseButton>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -250,6 +330,8 @@ const stats = ref({
 })
 
 const showCreateUserModal = ref(false)
+const showEditUserModal = ref(false)
+const editingUser = ref(null)
 const newUser = ref({
   username: '',
   email: '',
@@ -334,8 +416,8 @@ const createUser = async () => {
 }
 
 const editUser = (user) => {
-  // 这里可以实现编辑用户的功能
-  alert('编辑功能待实现')
+  editingUser.value = { ...user }
+  showEditUserModal.value = true
 }
 
 const deleteUser = async (user) => {
@@ -360,6 +442,39 @@ const deleteUser = async (user) => {
   } catch (error) {
     console.error('删除用户失败:', error)
     alert('删除用户失败')
+  }
+}
+
+const updateUser = async () => {
+  try {
+    const response = await fetch(`/api/users/${editingUser.value.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        username: editingUser.value.username,
+        email: editingUser.value.email,
+        role: editingUser.value.role,
+        isActive: editingUser.value.isActive,
+        experience: editingUser.value.experience || 0
+      })
+    })
+    
+    const data = await response.json()
+    
+    if (data.status === 'success') {
+      showEditUserModal.value = false
+      editingUser.value = null
+      await fetchUsers()
+      alert('用户更新成功')
+    } else {
+      alert(data.message || '更新用户失败')
+    }
+  } catch (error) {
+    console.error('更新用户失败:', error)
+    alert('更新用户失败')
   }
 }
 

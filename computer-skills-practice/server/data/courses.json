@@ -20,6 +20,27 @@
           "component": "challenges/01-click-course/DoubleClickChallenge.vue"
         }
       ]
+    },
+    {
+      "id": "drag-course",
+      "title": "拖拽练习",
+      "description": "学习基本的拖拽操作技能",
+      "icon": "🖱️",
+      "difficulty": "初级",
+      "challenges": [
+        {
+          "id": 3,
+          "title": "文件拖拽",
+          "description": "将文件从左侧容器拖拽到右侧容器",
+          "component": "challenges/02-drag-course/FileDragChallenge.vue"
+        },
+        {
+          "id": 4,
+          "title": "列表拖拽",
+          "description": "将指定文件从文件列表拖拽到目标容器",
+          "component": "challenges/02-drag-course/ListDragChallenge.vue"
+        }
+      ]
     }
   ]
 }

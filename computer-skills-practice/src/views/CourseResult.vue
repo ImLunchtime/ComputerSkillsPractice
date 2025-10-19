@@ -16,9 +16,10 @@
       <div class="mb-8">
         <h3 class="text-xl font-bold text-gray-900 mb-6">获得奖励</h3>
         <div class="py-8">
-          <div class="text-6xl mb-4">🏆</div>
-          <p class="text-gray-600 mb-4">目前还没有奖励系统</p>
-          <p class="text-sm text-gray-500">未来版本将添加经验值、徽章等奖励机制</p>
+          <div class="text-6xl mb-4">🎉</div>
+          <div class="text-3xl font-bold text-green-600 mb-2">+{{ experienceReward }} XP</div>
+          <p class="text-gray-600 mb-4">恭喜获得经验值奖励！</p>
+          <p class="text-sm text-gray-500">继续学习更多课程获得更多经验值</p>
         </div>
       </div>
 
@@ -44,6 +45,7 @@ const router = useRouter()
 const course = ref(null)
 const completedChallenges = ref(0)
 const completionTime = ref(0)
+const experienceReward = ref(30) // 经验值奖励
 
 // 格式化时间显示
 const formatTime = (seconds) => {
@@ -120,8 +122,29 @@ const shareResult = () => {
 onMounted(() => {
   if (route.params.courseId) {
     loadCourse(route.params.courseId)
+    // 调用课程完成API获得奖励
+    completeCourse(route.params.courseId)
   }
 })
+
+// 完成课程并获得奖励
+const completeCourse = async (courseId) => {
+  try {
+    const response = await fetch(`/api/courses/complete/${courseId}`, {
+      method: 'POST',
+      credentials: 'include'
+    })
+    
+    if (response.ok) {
+      const data = await response.json()
+      if (data.data && data.data.experienceReward) {
+        experienceReward.value = data.data.experienceReward
+      }
+    }
+  } catch (error) {
+    console.error('获取奖励失败:', error)
+  }
+}
 </script>
 
 <style scoped>

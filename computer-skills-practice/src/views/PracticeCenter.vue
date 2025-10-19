@@ -9,10 +9,10 @@
     <main class="h-screen flex flex-col pt-16">
       <!-- 数据统计区域 (1/4 高度) -->
       <div class="h-1/4 bg-white shadow-sm border-b border-gray-200">
-        <div class="max-w-6xl mx-auto px-6 py-8 h-full flex items-center">
+        <div class="mx-auto px-6 py-8 h-full flex items-center">
           <div class="w-full">
             <h1 class="text-3xl font-bold text-gray-900 mb-6 text-center">练习中心</h1>
-            <div class="grid grid-cols-2 gap-8 max-w-2xl mx-auto">
+            <div class="grid grid-cols-3 gap-6 mx-auto">
               <!-- 完成课程数 -->
               <div class="text-center">
                 <div class="text-4xl font-bold text-orange-500 mb-2">
@@ -26,6 +26,13 @@
                   {{ Math.round(overallProgress) }}%
                 </div>
                 <div class="text-gray-600 text-lg">学习进度</div>
+              </div>
+              <!-- 经验值 -->
+              <div class="text-center">
+                <div class="text-4xl font-bold text-green-600 mb-2">
+                  {{ currentUser?.experience || 0 }}XP
+                </div>
+                <div class="text-gray-600 text-lg">经验值</div>
               </div>
             </div>
           </div>
@@ -124,6 +131,7 @@ import NavBar from '../components/NavBar.vue'
 const router = useRouter()
 const courses = ref([])
 const userProgress = ref({})
+const currentUser = ref(null)
 const isHovered = ref(null)
 const timelineContainer = ref(null)
 
@@ -288,9 +296,26 @@ const loadUserProgress = async () => {
   }
 }
 
+// 加载当前用户信息
+const loadCurrentUser = async () => {
+  try {
+    const response = await fetch('/api/auth/me', {
+      credentials: 'include'
+    })
+    
+    if (response.ok) {
+      const data = await response.json()
+      currentUser.value = data.data.user
+    }
+  } catch (error) {
+    console.error('加载用户信息失败:', error)
+  }
+}
+
 onMounted(() => {
   loadCourses()
   loadUserProgress()
+  loadCurrentUser()
 })
 </script>
 

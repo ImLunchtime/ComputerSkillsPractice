@@ -33,14 +33,16 @@
         <IconLightbulb class="text-yellow-500 inline-block mr-1" /> 提示：需要快速点两次按钮（双击）才能通关！
       </div>
       
-      <!-- 重置按钮 -->
-      <button 
-        v-if="clickCount > 0"
-        @click="resetChallenge"
-        class="mt-4 text-gray-500 hover:text-gray-700 text-sm underline"
-      >
-        重新开始
-      </button>
+      <!-- 重置按钮 - 预留固定空间 -->
+      <div class="mt-4 h-6 flex justify-center">
+        <button 
+          v-if="clickCount > 0"
+          @click="resetChallenge"
+          class="text-gray-500 hover:text-gray-700 text-sm underline"
+        >
+          重新开始
+        </button>
+      </div>
     </div>
     
     <!-- 完成状态 -->

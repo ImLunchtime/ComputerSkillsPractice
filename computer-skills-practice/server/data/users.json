@@ -7,8 +7,9 @@
       "password": "$2b$10$TXHmQ7GWbUHuXtqsQqHNR.QXJWB2KQ0CW7z7.kNLjpQVFEjNqi6de",
       "role": "admin",
       "createdAt": "2025-10-19T07:42:24.358Z",
-      "lastLogin": "2025-10-19T11:49:08.498Z",
-      "isActive": true
+      "lastLogin": "2025-10-19T12:30:33.063Z",
+      "isActive": true,
+      "experience": 60
     }
   ],
   "nextId": 3
