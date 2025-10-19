@@ -12,7 +12,7 @@
         <!-- 导航菜单和按钮 -->
         <div class="flex items-center space-x-6">
           <router-link to="/" class="text-gray-600 hover:text-gray-900">首页</router-link>
-          <a href="#" class="text-gray-600 hover:text-gray-900">练习</a>
+          <router-link v-if="user" to="/practice" class="text-gray-600 hover:text-gray-900">练习</router-link>
           <a href="#" class="text-gray-600 hover:text-gray-900">关于</a>
           
           <!-- 用户状态显示 -->

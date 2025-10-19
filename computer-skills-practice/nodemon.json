@@ -3,6 +3,8 @@
   "ext": "js,json",
   "ignore": [
     "server/data/users.json",
+    "server/data/progress.json",
+    "server/data/courses.json",
     "node_modules/",
     "src/",
     "public/",

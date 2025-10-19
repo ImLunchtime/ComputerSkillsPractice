@@ -1,5 +1,5 @@
 <template>
-  <section class="py-20 px-4 bg-white w-full mb-8">
+  <section class="py-20 px-4 bg白 w-full mb-8">
     <div class="mx-auto">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-gray-900 mb-4">
@@ -53,7 +53,7 @@
       </div>
 
       <div class="text-center mt-12">
-        <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded">
+        <button @click="startLearning" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded">
           立即开始学习
         </button>
       </div>
@@ -62,7 +62,13 @@
 </template>
 
 <script setup>
-// 简化的介绍区域
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const startLearning = () => {
+  router.push('/practice')
+}
 </script>
 
 <style scoped>

@@ -44,11 +44,19 @@
           <p class="text-gray-600 mb-8">{{ currentChallenge.description }}</p>
           
           <!-- 动态加载挑战组件 -->
-          <component 
-            :is="currentChallengeComponent" 
-            @challenge-completed="onChallengeCompleted"
-            :challenge="currentChallenge"
-          />
+          <Suspense>
+            <component 
+              :is="currentChallengeComponent" 
+              @challenge-completed="onChallengeCompleted"
+              :challenge="currentChallenge"
+            />
+            <template #fallback>
+              <div class="flex items-center justify-center py-8">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                <span class="ml-2 text-gray-600">加载中...</span>
+              </div>
+            </template>
+          </Suspense>
         </div>
         
         <!-- 课程完成状态 -->
@@ -92,13 +100,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, computed, onMounted, watch, defineAsyncComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import NavBar from '../components/NavBar.vue'
-
-// 导入挑战组件
-import ClickChallenge from '../components/challenges/ClickChallenge.vue'
-import DoubleClickChallenge from '../components/challenges/DoubleClickChallenge.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -122,15 +126,10 @@ const progressPercentage = computed(() => {
 })
 
 const currentChallengeComponent = computed(() => {
-  if (!currentChallenge.value) return null
+  if (!currentChallenge.value || !currentChallenge.value.component) return null
   
-  // 根据挑战类型返回对应的组件
-  const componentMap = {
-    'click': ClickChallenge,
-    'double-click': DoubleClickChallenge
-  }
-  
-  return componentMap[currentChallenge.value.type] || null
+  // 异步组件加载
+  return defineAsyncComponent(() => import(/* @vite-ignore */ `../components/${currentChallenge.value.component}`))
 })
 
 // 加载课程数据
@@ -171,13 +170,23 @@ const loadUserProgress = async (courseId) => {
     if (response.ok) {
       const data = await response.json()
       const progress = data.data.progress || {}
-      
-      // 设置已完成的挑战
-      Object.keys(progress).forEach(challengeId => {
-        if (progress[challengeId]) {
-          completedChallenges.value.add(parseInt(challengeId))
-        }
-      })
+
+      const totalChallenges = course.value?.challenges?.length || 0
+      const completedCount = Object.values(progress).filter(Boolean).length
+
+      if (totalChallenges > 0 && completedCount >= totalChallenges) {
+        // 已完成课程，重新练习时从头开始，不使用历史进度
+        completedChallenges.value = new Set()
+        courseCompleted.value = false
+        currentChallengeIndex.value = 0
+      } else {
+        // 设置已完成的挑战（用于未完成课程继续练习）
+        Object.keys(progress).forEach(challengeId => {
+          if (progress[challengeId]) {
+            completedChallenges.value.add(parseInt(challengeId))
+          }
+        })
+      }
       
       // 找到下一个未完成的挑战
       findNextChallenge()

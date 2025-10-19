@@ -11,13 +11,13 @@
           "id": 1,
           "title": "单击挑战",
           "description": "点击按钮完成挑战",
-          "type": "click"
+          "component": "challenges/01-click-course/ClickChallenge.vue"
         },
         {
           "id": 2,
           "title": "双击挑战",
           "description": "快速双击按钮完成挑战",
-          "type": "double-click"
+          "component": "challenges/01-click-course/DoubleClickChallenge.vue"
         }
       ]
     }

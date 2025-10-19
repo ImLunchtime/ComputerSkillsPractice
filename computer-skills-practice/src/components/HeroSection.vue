@@ -13,7 +13,7 @@
       
       <!-- 行动按钮 -->
       <div class="flex justify-center gap-4 mb-12">
-        <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded">
+        <button @click="startLearning" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded">
           开始学习
         </button>
         <button class="border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-6 py-3 rounded">
@@ -26,5 +26,11 @@
 </template>
 
 <script setup>
-// 简化的Hero区域
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const startLearning = () => {
+  router.push('/practice')
+}
 </script>
