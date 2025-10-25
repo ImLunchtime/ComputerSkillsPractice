@@ -30,10 +30,10 @@ const classes = computed(() => {
 </script>
 
 <style scoped>
-/* 基础样式：无边框、无圆角 */
+/* 基础样式：无边框、圆角 */
 .btn {
   border: none;
-  border-radius: 10px;
+  border-radius: 114514px;
   padding: 0.75rem 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -48,69 +48,69 @@ const classes = computed(() => {
   box-shadow: none;
 }
 
-/* 主要按钮：蓝色背景 + 深蓝色下移3px无模糊阴影 */
+/* 主要按钮：蓝色背景 + 阴影 */
 .btn-primary {
   background-color: #2563eb; /* blue-600 */
   color: #ffffff;
-  box-shadow: 0 3px 0 #1e40af; /* blue-800 */
+  box-shadow: 0 3px 10px #0000001f; /* 阴影 */
 }
 .btn-primary:hover,
 .btn-primary.is-hover { background-color: #1d4ed8; /* blue-700 */ }
 .btn-primary:active,
-.btn-primary.is-active { transform: translateY(3px); box-shadow: 0 0 0 #1e40af; }
+.btn-primary.is-active { transform: translateY(3px); box-shadow: 0 3px 10px #0000001f; /* 阴影 */ }
 
-/* 次要按钮：白色背景 + 灰色下移3px无模糊阴影 */
+/* 次要按钮：白色背景 + 阴影 */
 .btn-secondary {
   background-color: #ffffff;
   color: #1f2937; /* gray-800 */
-  box-shadow: 0 3px 0 #9ca3af; /* gray-400 */
+  box-shadow: 0 3px 10px #0000001f; /* 阴影 */
 }
 .btn-secondary:hover,
 .btn-secondary.is-hover { background-color: #f9fafb; /* gray-50 */ }
 .btn-secondary:active,
-.btn-secondary.is-active { transform: translateY(3px); box-shadow: 0 0 0 #9ca3af; }
+.btn-secondary.is-active { transform: translateY(3px); box-shadow: 0 3px 10px #0000001f; /* 阴影 */ }
 
 /* 金色（黄色）按钮 */
 .btn-gold {
   background-color: #f59e0b; /* amber-500 */
   color: #ffffff;
-  box-shadow: 0 3px 0 #b45309; /* amber-700 */
+  box-shadow: 0 3px 10px #0000001f; /* 阴影 */
 }
 .btn-gold:hover,
 .btn-gold.is-hover { background-color: #d97706; /* amber-600 */ }
 .btn-gold:active,
-.btn-gold.is-active { transform: translateY(3px); box-shadow: 0 0 0 #b45309; }
+.btn-gold.is-active { transform: translateY(3px); box-shadow: 0 3px 10px #0000001f; /* 阴影 */ }
 
 /* 绿色按钮（浅绿色） */
 .btn-green {
   background-color: #86efac; /* green-300 */
   color: #064e3b; /* green-800 提升可读性 */
-  box-shadow: 0 3px 0 #22c55e; /* green-500 */
+  box-shadow: 0 3px 10px #0000001f; /* 阴影 */
 }
 .btn-green:hover,
 .btn-green.is-hover { background-color: #6ee7b7; /* green-300 接近 */ }
 .btn-green:active,
-.btn-green.is-active { transform: translateY(3px); box-shadow: 0 0 0 #22c55e; }
+.btn-green.is-active { transform: translateY(3px); box-shadow: 0 3px 10px #0000001f; /* 阴影 */ }
 
 /* 橙色按钮 */
 .btn-orange {
   background-color: #f97316; /* orange-500 */
   color: #ffffff;
-  box-shadow: 0 3px 0 #c2410c; /* orange-700 */
+  box-shadow: 0 3px 10px #0000001f; /* 阴影 */
 }
 .btn-orange:hover,
 .btn-orange.is-hover { background-color: #ea580c; /* orange-600 */ }
 .btn-orange:active,
-.btn-orange.is-active { transform: translateY(3px); box-shadow: 0 0 0 #c2410c; }
+.btn-orange.is-active { transform: translateY(3px); box-shadow: 0 3px 10px #0000001f; /* 阴影 */ }
 
 /* 红色按钮 */
 .btn-red {
   background-color: #ef4444; /* red-500 */
   color: #ffffff;
-  box-shadow: 0 3px 0 #b91c1c; /* red-700 */
+  box-shadow: 0 3px 10px #0000001f; /* 阴影 */
 }
 .btn-red:hover,
 .btn-red.is-hover { background-color: #dc2626; /* red-600 */ }
 .btn-red:active,
-.btn-red.is-active { transform: translateY(3px); box-shadow: 0 0 0 #b91c1c; }
+.btn-red.is-active { transform: translateY(3px); box-shadow: 0 3px 10px #0000001f; /* 阴影 */ }
 </style>
