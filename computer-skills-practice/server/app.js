@@ -45,7 +45,7 @@ app.use(express.urlencoded({ extended: true }));
 import apiRoutes from './routes/api.js';
 import authRoutes from './routes/auth.js';
 import userRoutes from './routes/users.js';
-import courseRoutes from './routes/courses.js';
+import courseRoutes from './routes/coursesSQLite.js'; // 使用SQLite版本
 
 // API路由
 app.get('/api/health', (req, res) => {

@@ -1,4 +1,4 @@
-import User from '../models/User.js';
+import User from '../models/UserSQLite.js'; // 使用SQLite版本
 
 // 验证用户是否已登录
 export const requireAuth = (req, res, next) => {

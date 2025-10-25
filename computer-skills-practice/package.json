@@ -20,6 +20,7 @@
     "@iconify-prerendered/vue-material-symbols": "^0.28.1755063979",
     "@tailwindcss/vite": "^4.1.14",
     "bcrypt": "^6.0.0",
+    "better-sqlite3": "^12.4.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
