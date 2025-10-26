@@ -3,7 +3,6 @@ version: '3.8'
 services:
   computer-skills-practice:
     build: .
-    container_name: computer-skills-practice
     ports:
       - "5173:5173"
     volumes:
@@ -21,4 +20,5 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+    command: ["npm", "run", "start-public"]
       start_period: 40s

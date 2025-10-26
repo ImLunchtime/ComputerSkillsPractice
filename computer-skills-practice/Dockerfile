@@ -48,4 +48,4 @@ RUN npm prune --production
 EXPOSE 5173
 
 # 启动命令
-CMD ["npm", "run", "start:docker"]
+CMD ["npm", "run", "start-public"]
