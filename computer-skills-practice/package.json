@@ -14,7 +14,8 @@
     "server": "nodemon server/app.js",
     "start": "concurrently \"npm run server\" \"npm run dev\"",
     "start-public": "concurrently \"npm run server\" \"npm run dev:host\"",
-    "start:prod": "npm run build && node server/app.js"
+    "start:prod": "npm run build && node server/app.js",
+    "start:docker": "node server/app.js"
   },
   "dependencies": {
     "@iconify-prerendered/vue-material-symbols": "^0.28.1755063979",
