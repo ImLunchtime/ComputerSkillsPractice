@@ -81,9 +81,11 @@ app.use((err, req, res, next) => {
 });
 
 // 启动服务器
-app.listen(PORT, () => {
-  console.log(`🚀 后端服务器运行在 http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 服务器运行在 http://localhost:${PORT}`);
   console.log(`📡 API接口可通过 http://localhost:${PORT}/api 访问`);
+  console.log(`🌐 前端页面可通过 http://localhost:${PORT} 访问`);
+  console.log(`🔧 环境: ${process.env.NODE_ENV || 'development'}`);
 });
 
 export default app;
