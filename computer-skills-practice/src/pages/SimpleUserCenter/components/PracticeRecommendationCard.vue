@@ -1,38 +1,38 @@
 <template>
-  <div class="bg-white rounded-lg shadow-md p-8 w-96 h-96">
+  <div class="bg-white rounded-lg shadow-md p-8 w-[600px] h-96 flex flex-col">
     <h2 class="text-xl font-bold text-gray-800 mb-4">练习推荐</h2>
     
-    <!-- 推荐练习列表 -->
-    <div class="space-y-4">
+    <!-- 推荐练习列表 - 改为横向布局 -->
+    <div class="flex gap-4 flex-1">
       <!-- 下一个练习推荐 -->
-      <div class="border border-gray-200 rounded-lg p-4 hover:shadow-sm transition-shadow">
+      <div class="flex-1 border border-gray-200 rounded-lg p-4 hover:shadow-sm transition-shadow flex flex-col">
         <div class="flex items-center mb-2">
           <div class="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
           <span class="text-sm text-gray-600">即将学习</span>
         </div>
         <h3 class="font-semibold text-gray-800 mb-1">{{ nextPractice.title }}</h3>
-        <p class="text-sm text-gray-600 mb-3">{{ nextPractice.description }}</p>
+        <p class="text-sm text-gray-600 mb-3 flex-grow">{{ nextPractice.description }}</p>
         <BaseButton 
           variant="primary" 
           @click="startPractice(nextPractice.id)"
-          class="w-full text-sm"
+          class="w-full text-sm mt-auto"
         >
           开始练习
         </BaseButton>
       </div>
       
       <!-- 智能推荐练习 -->
-      <div class="border border-gray-200 rounded-lg p-4 hover:shadow-sm transition-shadow">
+      <div class="flex-1 border border-gray-200 rounded-lg p-4 hover:shadow-sm transition-shadow flex flex-col">
         <div class="flex items-center mb-2">
           <div class="w-3 h-3 bg-orange-500 rounded-full mr-2"></div>
           <span class="text-sm text-gray-600">智能推荐</span>
         </div>
         <h3 class="font-semibold text-gray-800 mb-1">{{ recommendedPractice.title }}</h3>
-        <p class="text-sm text-gray-600 mb-3">{{ recommendedPractice.description }}</p>
+        <p class="text-sm text-gray-600 mb-3 flex-grow">{{ recommendedPractice.description }}</p>
         <BaseButton 
           variant="secondary" 
           @click="startPractice(recommendedPractice.id)"
-          class="w-full text-sm"
+          class="w-full text-sm mt-auto"
         >
           开始练习
         </BaseButton>

@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-white rounded-lg shadow-md p-8 w-96 h-96">
-    <h2 class="text-xl font-bold text-gray-800 mb-4">快速导航</h2>
+  <div class="p-6 w-80 h-96">
+    <h2 class="text-lg font-bold text-gray-800 mb-4">快速导航</h2>
     
     <!-- 功能按钮 -->
     <div class="space-y-3 mb-6">
