@@ -1,13 +1,5 @@
 <template>
   <div class="p-8">
-    <!-- 推荐练习部分 -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold text-gray-900 mb-6 mt-4">推荐练习</h2>
-      <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center">
-        <p class="text-gray-600 text-lg">推荐功能即将上线</p>
-      </div>
-    </section>
-
     <!-- 所有练习部分 -->
     <section>
       <h2 class="text-2xl font-bold text-gray-900 mb-6 mt-8">所有练习</h2>

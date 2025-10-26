@@ -5,36 +5,38 @@
     <!-- 推荐练习列表 - 改为横向布局 -->
     <div class="flex gap-4 flex-1">
       <!-- 下一个练习推荐 -->
-      <div class="flex-1 border border-gray-200 rounded-lg p-4 hover:shadow-sm transition-shadow flex flex-col">
-        <div class="flex items-center mb-2">
+      <div class="flex-1 border border-gray-200 rounded-lg p-5 hover:shadow-sm transition-shadow flex flex-col">
+        <div class="flex items-center mb-3">
           <div class="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
+          <div class="w-1 h-3 mr-2"></div>
           <span class="text-sm text-gray-600">即将学习</span>
         </div>
-        <h3 class="font-semibold text-gray-800 mb-1">{{ nextPractice.title }}</h3>
-        <p class="text-sm text-gray-600 mb-3 flex-grow">{{ nextPractice.description }}</p>
+        <h3 class="font-semibold text-gray-800 mb-2">{{ nextPractice.title }}</h3>
+        <p class="text-sm text-gray-600 mb-4 flex-grow leading-relaxed">{{ nextPractice.description }}</p>
         <BaseButton 
           variant="primary" 
           @click="startPractice(nextPractice.id)"
           class="w-full text-sm mt-auto"
         >
-          开始练习
+          开始
         </BaseButton>
       </div>
       
       <!-- 智能推荐练习 -->
-      <div class="flex-1 border border-gray-200 rounded-lg p-4 hover:shadow-sm transition-shadow flex flex-col">
-        <div class="flex items-center mb-2">
+      <div class="flex-1 border border-gray-200 rounded-lg p-5 hover:shadow-sm transition-shadow flex flex-col">
+        <div class="flex items-center mb-3">
           <div class="w-3 h-3 bg-orange-500 rounded-full mr-2"></div>
+          <div class="w-1 h-3 mr-2"></div>
           <span class="text-sm text-gray-600">智能推荐</span>
         </div>
-        <h3 class="font-semibold text-gray-800 mb-1">{{ recommendedPractice.title }}</h3>
-        <p class="text-sm text-gray-600 mb-3 flex-grow">{{ recommendedPractice.description }}</p>
+        <h3 class="font-semibold text-gray-800 mb-2">{{ recommendedPractice.title }}</h3>
+        <p class="text-sm text-gray-600 mb-4 flex-grow leading-relaxed">{{ recommendedPractice.description }}</p>
         <BaseButton 
-          variant="secondary" 
+          variant="primary" 
           @click="startPractice(recommendedPractice.id)"
           class="w-full text-sm mt-auto"
         >
-          开始练习
+          开始
         </BaseButton>
       </div>
     </div>
@@ -99,7 +101,7 @@ const nextPractice = computed(() => {
       return {
         id: lastCompleted.id,
         title: lastCompleted.title,
-        description: '复习已完成的练习'
+        description: lastCompleted.description || '复习已完成的练习'
       }
     } else {
       // 如果没有完成的课程，返回第一个课程
@@ -107,7 +109,7 @@ const nextPractice = computed(() => {
       return {
         id: firstCourse.id,
         title: firstCourse.title,
-        description: '开始你的学习之旅'
+        description: firstCourse.description || '开始你的学习之旅'
       }
     }
   }
@@ -130,7 +132,7 @@ const recommendedPractice = computed(() => {
   return {
     id: randomCourse.id,
     title: randomCourse.title,
-    description: '基于你的学习情况推荐'
+    description: randomCourse.description || '探索新的学习内容'
   }
 })
 

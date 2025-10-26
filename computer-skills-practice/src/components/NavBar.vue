@@ -7,9 +7,8 @@
           <router-link to="/" class="text-2xl font-bold text-gray-800 hover:text-gray-900">
             TM计算机技能练习网
           </router-link>
-          <router-link to="/" class="text-gray-600 hover:text-gray-900">首页</router-link>
-          <router-link v-if="user" to="/practice" class="text-gray-600 hover:text-gray-900">练习</router-link>
-          <router-link v-if="user" to="/simple-practice" class="text-gray-600 hover:text-gray-900">简易练习中心</router-link>
+          <router-link v-if="user" to="/simple-practice" class="text-gray-600 hover:text-gray-900">主页</router-link>
+          <router-link v-if="user" to="/practice" class="text-gray-600 hover:text-gray-900">全部练习</router-link>
           <a href="#" class="text-gray-600 hover:text-gray-900">关于</a>
         </div>
 
@@ -24,7 +23,7 @@
             </div>
             <span class="text-gray-700">{{ user.username }}</span>
             <span v-if="user.role === 'admin'" class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">
-              管理员
+              ADMIN
             </span>
           </div>
           <!-- 用户菜单 -->

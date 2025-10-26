@@ -7,26 +7,14 @@
     
     <!-- 主要内容 -->
     <main class="h-screen flex pt-16 p-4">
-      <!-- 左侧边栏组件 -->
-      <PracticeSidebar 
-        :selected-tab="selectedTab" 
-        @tab-change="selectTab" 
-      />
-
-      <!-- 右侧内容区域 -->
+      <!-- 内容区域 -->
       <div class="flex-1 overflow-y-auto">
-        <!-- 专项练习选项卡 -->
+        <!-- 专项练习 -->
         <PracticeTab 
           v-if="selectedTab === 'practice'"
           :courses="courses"
           :user-progress="userProgress"
         />
-        
-        <!-- 技能学习选项卡 -->
-        <SkillsTab v-else-if="selectedTab === 'learning'" />
-        
-        <!-- 个人资料选项卡 -->
-        <ProfileTab v-else-if="selectedTab === 'profile'" />
       </div>
     </main>
   </div>
