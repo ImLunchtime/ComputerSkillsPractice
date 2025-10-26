@@ -11,6 +11,10 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=5173
+      # 管理员配置（可选，如果不设置将使用默认值）
+      - ADMIN_USERNAME=xtm
+      - ADMIN_EMAIL=xtm@tmtec.top
+      - ADMIN_PASSWORD=1145141919810
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:5173/api/health"]
