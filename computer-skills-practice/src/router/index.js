@@ -4,6 +4,7 @@ import AuthView from '../pages/Auth/AuthView.vue'
 import UserProfile from '../pages/Profile/UserProfile.vue'
 import AdminPanel from '../pages/Admin/AdminPanel.vue'
 import PracticeCenter from '../pages/Practice/PracticeCenter.vue'
+import SimpleUserCenter from '../pages/SimpleUserCenter/SimpleUserCenter.vue'
 import CourseView from '../pages/Course/CourseView.vue'
 import CourseResult from '../pages/Course/CourseResult.vue'
 import DesignLanguage from '../pages/DesignLanguage/DesignLanguage.vue'
@@ -39,6 +40,12 @@ const router = createRouter({
       component: PracticeCenter,
       meta: { requiresAuth: true }
     },
+    {
+    path: '/simple-practice',
+    name: 'simple-practice-center',
+    component: SimpleUserCenter,
+    meta: { requiresAuth: true }
+  },
     {
       path: '/practice/:courseId',
       name: 'course',

@@ -9,6 +9,7 @@
           </router-link>
           <router-link to="/" class="text-gray-600 hover:text-gray-900">首页</router-link>
           <router-link v-if="user" to="/practice" class="text-gray-600 hover:text-gray-900">练习</router-link>
+          <router-link v-if="user" to="/simple-practice" class="text-gray-600 hover:text-gray-900">简易练习中心</router-link>
           <a href="#" class="text-gray-600 hover:text-gray-900">关于</a>
         </div>
 

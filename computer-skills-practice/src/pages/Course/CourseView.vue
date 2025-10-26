@@ -238,7 +238,7 @@ const onChallengeCompleted = async () => {
 
 // 返回练习中心
 const goBack = () => {
-  router.push('/practice')
+  router.push('/simple-practice')
 }
 
 // 前往结果页面
