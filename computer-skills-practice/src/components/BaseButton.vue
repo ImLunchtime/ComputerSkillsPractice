@@ -13,7 +13,7 @@
 import { computed } from 'vue'
 
 const props = defineProps({
-  variant: { type: String, default: 'primary' }, // primary | secondary | gold | green | orange | red
+  variant: { type: String, default: 'primary' }, // primary | secondary | gold | green | orange | red | red-outline
   disabled: { type: Boolean, default: false },
   type: { type: String, default: 'button' },
   // 用于在样例页面静态呈现悬停/按下状态：'' | 'hover' | 'active'
@@ -37,7 +37,7 @@ const classes = computed(() => {
   padding: 0.75rem 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color .2s ease, transform .05s ease;
+  transition: background-color .2s ease, transform .05s ease, border-color .2s ease, color .2s ease;
   -webkit-appearance: none;
   appearance: none;
 }
@@ -113,4 +113,23 @@ const classes = computed(() => {
 .btn-red.is-hover { background-color: #dc2626; /* red-600 */ }
 .btn-red:active,
 .btn-red.is-active { transform: translateY(3px); box-shadow: 0 3px 10px #0000001f; /* 阴影 */ }
+
+/* 红色边框按钮：白色背景 + 红色边框 */
+.btn-red-outline {
+  background-color: #ffffff;
+  color: #ef4444; /* red-500 */
+  border: 2px solid #ef4444; /* red-500 */
+  box-shadow: 0 3px 10px #0000001f; /* 阴影 */
+}
+.btn-red-outline:hover,
+.btn-red-outline.is-hover { 
+  background-color: #fef2f2; /* red-50 */
+  border-color: #dc2626; /* red-600 */
+  color: #dc2626; /* red-600 */
+}
+.btn-red-outline:active,
+.btn-red-outline.is-active { 
+  transform: translateY(3px); 
+  box-shadow: 0 3px 10px #0000001f; /* 阴影 */
+}
 </style>
