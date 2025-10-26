@@ -13,11 +13,11 @@ const __dirname = path.dirname(__filename);
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5173; // 改为5173端口以匹配前端
+const PORT = process.env.PORT || 3000; // 改回3000端口
 
 // 中间件配置
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' ? false : 'http://localhost:5173', // 生产环境不需要CORS
+  origin: process.env.NODE_ENV === 'production' ? false : 'http://localhost:5173', // 前端运行在5173端口
   credentials: true
 }));
 
