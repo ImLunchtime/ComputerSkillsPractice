@@ -64,12 +64,14 @@ app.use('/api/courses', courseRoutes);
 
 // 静态文件服务（用于生产环境）
 // 注意：静态文件服务应该在API路由之后，避免冲突
-app.use(express.static(path.join(__dirname, '../dist')));
-
-// 处理Vue路由（用于生产环境）
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../dist/index.html'));
-});
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../dist')));
+  
+  // 处理Vue路由（用于生产环境）
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../dist/index.html'));
+  });
+}
 
 // 错误处理中间件
 app.use((err, req, res, next) => {
