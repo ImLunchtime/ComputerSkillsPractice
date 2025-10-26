@@ -15,9 +15,13 @@ RUN apk add --no-cache \
 # 复制package文件
 COPY package*.json ./
 
+# 设置环境变量
+ENV NODE_ENV=production
+ENV PORT=5173
+ENV PYTHON=/usr/bin/python3
+
 # 设置npm配置
 ENV npm_config_build_from_source=true
-ENV PYTHON=/usr/bin/python3
 
 # 安装依赖（包括开发依赖用于构建）
 RUN npm ci

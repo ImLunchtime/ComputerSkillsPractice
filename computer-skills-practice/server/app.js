@@ -13,11 +13,11 @@ const __dirname = path.dirname(__filename);
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5173; // 改为5173端口以匹配前端
 
 // 中间件配置
 app.use(cors({
-  origin: 'http://localhost:5173', // Vue开发服务器地址
+  origin: process.env.NODE_ENV === 'production' ? false : 'http://localhost:5173', // 生产环境不需要CORS
   credentials: true
 }));
 
@@ -67,10 +67,9 @@ app.use('/api/courses', courseRoutes);
 app.use(express.static(path.join(__dirname, '../dist')));
 
 // 处理Vue路由（用于生产环境）
-// 注释掉这个路由，因为在开发环境中不需要
-// app.get('/*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../dist/index.html'));
-// });
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
+});
 
 // 错误处理中间件
 app.use((err, req, res, next) => {
