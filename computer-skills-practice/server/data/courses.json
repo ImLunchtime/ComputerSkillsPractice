@@ -41,6 +41,54 @@
           "component": "challenges/02-drag-course/ListDragChallenge.vue"
         }
       ]
+    },
+    {
+      "id": "context-menu-course",
+      "title": "右键菜单练习",
+      "description": "学习使用右键菜单进行各种操作",
+      "icon": "🖱️",
+      "difficulty": "中级",
+      "challenges": [
+        {
+          "id": 5,
+          "title": "右键菜单新建文档",
+          "description": "使用右键菜单在文件管理器中创建新文档",
+          "component": "challenges/03-context-menu-course/ContextMenuNewFileChallenge.vue"
+        },
+        {
+          "id": 6,
+          "title": "右键菜单复制粘贴",
+          "description": "使用右键菜单复制文件并粘贴到另一个文件夹",
+          "component": "challenges/03-context-menu-course/ContextMenuCopyPasteChallenge.vue"
+        },
+        {
+          "id": 7,
+          "title": "右键菜单打开",
+          "description": "使用右键菜单打开指定的文件",
+          "component": "challenges/03-context-menu-course/ContextMenuOpenChallenge.vue"
+        }
+      ]
+    },
+    {
+      "id": "shortcut-course",
+      "title": "快捷键基础",
+      "description": "学习使用键盘快捷键进行复制粘贴操作",
+      "icon": "⌨️",
+      "difficulty": "初级",
+      "challenges": [
+        {
+          "id": 8,
+          "title": "快捷键复制粘贴",
+          "description": "使用 Ctrl+C 和 Ctrl+V 进行文本复制粘贴",
+          "component": "challenges/04-shortcut-course/ShortcutCopyPasteChallenge.vue"
+        },
+        {
+          "id": 9,
+          "title": "快捷键全选复制粘贴",
+          "description": "使用 Ctrl+A、Ctrl+C 和 Ctrl+V 进行全选复制粘贴",
+          "component": "challenges/04-shortcut-course/ShortcutSelectAllChallenge.vue"
+        }
+      ]
     }
   ]
 }
