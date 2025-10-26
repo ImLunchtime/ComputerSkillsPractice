@@ -19,14 +19,17 @@ COPY package*.json ./
 ENV npm_config_build_from_source=true
 ENV PYTHON=/usr/bin/python3
 
-# 安装依赖
-RUN npm ci --only=production
+# 安装依赖（包括开发依赖用于构建）
+RUN npm ci
 
 # 复制应用代码
 COPY . .
 
 # 构建前端应用
 RUN npm run build
+
+# 清理开发依赖以减小镜像大小
+RUN npm prune --production
 
 # 暴露端口
 EXPOSE 5173
