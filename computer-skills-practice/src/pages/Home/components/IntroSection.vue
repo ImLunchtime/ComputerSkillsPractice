@@ -65,7 +65,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 const startLearning = () => {
-  router.push('/practice')
+  router.push('/all-practice')
 }
 </script>
 

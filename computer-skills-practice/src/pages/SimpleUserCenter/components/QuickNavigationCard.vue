@@ -43,7 +43,7 @@ const router = useRouter()
 
 // 方法
 const goToPracticeCenter = () => {
-  router.push('/practice')
+  router.push('/all-practice')
 }
 
 const goToProfile = () => {

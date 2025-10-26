@@ -35,13 +35,13 @@ const router = createRouter({
       meta: { requiresAuth: true, requiresAdmin: true }
     },
     {
-      path: '/practice',
+      path: '/all-practice',
       name: 'practice-center',
       component: PracticeCenter,
       meta: { requiresAuth: true }
     },
     {
-    path: '/simple-practice',
+    path: '/uc',
     name: 'simple-practice-center',
     component: SimpleUserCenter,
     meta: { requiresAuth: true }

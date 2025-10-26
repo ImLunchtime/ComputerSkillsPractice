@@ -8,7 +8,6 @@
       <div class="flex-1 border border-gray-200 rounded-lg p-5 hover:shadow-sm transition-shadow flex flex-col">
         <div class="flex items-center mb-3">
           <div class="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
-          <div class="w-1 h-3 mr-2"></div>
           <span class="text-sm text-gray-600">即将学习</span>
         </div>
         <h3 class="font-semibold text-gray-800 mb-2">{{ nextPractice.title }}</h3>
@@ -26,7 +25,6 @@
       <div class="flex-1 border border-gray-200 rounded-lg p-5 hover:shadow-sm transition-shadow flex flex-col">
         <div class="flex items-center mb-3">
           <div class="w-3 h-3 bg-orange-500 rounded-full mr-2"></div>
-          <div class="w-1 h-3 mr-2"></div>
           <span class="text-sm text-gray-600">智能推荐</span>
         </div>
         <h3 class="font-semibold text-gray-800 mb-2">{{ recommendedPractice.title }}</h3>

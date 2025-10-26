@@ -4,11 +4,11 @@
       <div class="flex justify-between items-center h-16">
         <!-- 品牌标识和导航链接 -->
         <div class="flex items-center space-x-8">
-          <router-link to="/" class="text-2xl font-bold text-gray-800 hover:text-gray-900">
+          <router-link to="/" class="text-2xl font-bold text-cyan-300">
             TM计算机技能练习网
           </router-link>
-          <router-link v-if="user" to="/simple-practice" class="text-gray-600 hover:text-gray-900">主页</router-link>
-          <router-link v-if="user" to="/practice" class="text-gray-600 hover:text-gray-900">全部练习</router-link>
+          <router-link v-if="user" to="/uc" class="text-gray-600 hover:text-gray-900">主页</router-link>
+          <router-link v-if="user" to="/all-practice" class="text-gray-600 hover:text-gray-900">全部练习</router-link>
           <a href="#" class="text-gray-600 hover:text-gray-900">关于</a>
         </div>
 

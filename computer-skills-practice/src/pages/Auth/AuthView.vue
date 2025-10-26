@@ -29,8 +29,8 @@ const handleAuthSuccess = (user) => {
   // 触发全局用户状态更新
   window.dispatchEvent(new CustomEvent('user-login', { detail: user }))
   
-  // 跳转到练习中心
-  router.push('/practice')
+  // 跳转到用户中心
+  router.push('/uc')
 }
 
 const handleRegisterSuccess = (user) => {

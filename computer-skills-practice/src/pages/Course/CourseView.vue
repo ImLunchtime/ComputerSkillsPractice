@@ -147,11 +147,11 @@ const loadCourse = async (courseId) => {
       await loadUserProgress(courseId)
     } else {
       console.error('课程不存在')
-      router.push('/practice')
+      router.push('/all-practice')
     }
   } catch (error) {
     console.error('加载课程失败:', error)
-    router.push('/practice')
+    router.push('/all-practice')
   }
 }
 
@@ -238,7 +238,7 @@ const onChallengeCompleted = async () => {
 
 // 返回练习中心
 const goBack = () => {
-  router.push('/simple-practice')
+  router.push('/uc')
 }
 
 // 前往结果页面

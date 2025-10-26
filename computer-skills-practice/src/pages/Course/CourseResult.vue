@@ -90,7 +90,7 @@ const loadCourse = async (courseId) => {
 
 // 返回练习中心
 const goToPracticeCenter = () => {
-  router.push('/simple-practice')
+  router.push('/uc')
 }
 
 // 重新练习课程
