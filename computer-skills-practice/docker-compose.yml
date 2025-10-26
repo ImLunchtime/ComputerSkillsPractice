@@ -20,5 +20,5 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-    command: ["npm", "run", "start-public"]
       start_period: 40s
+    command: ["npm", "run", "start-public"]
