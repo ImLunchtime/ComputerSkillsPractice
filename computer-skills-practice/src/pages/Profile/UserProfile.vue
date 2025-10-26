@@ -4,11 +4,23 @@
     <NavBar />
     
     <!-- 主要内容 -->
-    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <main class="mx-auto py-6 sm:px-6 lg:px-8">
       <div class="px-4 py-6 sm:px-0">
         <div class="bg-white shadow rounded-lg">
           <div class="px-4 py-5 sm:p-6">
-            <h1 class="text-2xl font-bold text-gray-900 mb-6">用户主页</h1>
+            <!-- 返回按钮和标题 -->
+            <div class="flex items-center mb-6">
+              <button 
+                @click="goBack"
+                class="flex items-center text-gray-600 hover:text-gray-900 transition-colors duration-200 mr-4"
+              >
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                返回
+              </button>
+              <h1 class="text-2xl font-bold text-gray-900">用户主页</h1>
+            </div>
             
             <!-- 用户信息卡片 -->
             <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
@@ -147,5 +159,9 @@ const goToSkills = () => {
 
 const goToAdmin = () => {
   router.push('/admin')
+}
+
+const goBack = () => {
+  router.back()
 }
 </script>
