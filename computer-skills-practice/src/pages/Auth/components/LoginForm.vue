@@ -62,7 +62,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import BaseButton from './BaseButton.vue'
+import BaseButton from '../../../components/BaseButton.vue'
 
 const emit = defineEmits(['switch-to-register', 'login-success'])
 

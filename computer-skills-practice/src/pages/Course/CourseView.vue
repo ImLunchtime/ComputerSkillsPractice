@@ -96,7 +96,7 @@
 <script setup>
 import { ref, computed, onMounted, watch, defineAsyncComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import NavBar from '../components/NavBar.vue'
+import NavBar from '../../components/NavBar.vue'
 import { IconCelebration } from '@iconify-prerendered/vue-material-symbols'
 
 const route = useRoute()
@@ -124,7 +124,7 @@ const currentChallengeComponent = computed(() => {
   if (!currentChallenge.value || !currentChallenge.value.component) return null
   
   // 异步组件加载
-  return defineAsyncComponent(() => import(/* @vite-ignore */ `../components/${currentChallenge.value.component}`))
+  return defineAsyncComponent(() => import(/* @vite-ignore */ `./components/${currentChallenge.value.component}`))
 })
 
 // 加载课程数据

@@ -104,8 +104,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import NavBar from '../components/NavBar.vue'
-import BaseButton from '../components/BaseButton.vue'
+import NavBar from '../../components/NavBar.vue'
+import BaseButton from '../../components/BaseButton.vue'
 
 const router = useRouter()
 const user = ref(null)

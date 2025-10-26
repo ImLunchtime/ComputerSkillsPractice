@@ -36,7 +36,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import NavBar from '../components/NavBar.vue'
+import NavBar from '../../components/NavBar.vue'
 import { IconCelebration, IconLibraryBooks } from '@iconify-prerendered/vue-material-symbols'
 
 const route = useRoute()

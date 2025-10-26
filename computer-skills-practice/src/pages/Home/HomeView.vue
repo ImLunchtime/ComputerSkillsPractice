@@ -15,9 +15,9 @@
 </template>
 
 <script setup>
-import NavBar from '../components/NavBar.vue'
-import HeroSection from '../components/HeroSection.vue'
-import IntroSection from '../components/IntroSection.vue'
+import NavBar from '../../components/NavBar.vue'
+import HeroSection from './components/HeroSection.vue'
+import IntroSection from './components/IntroSection.vue'
 </script>
 
 <style scoped>

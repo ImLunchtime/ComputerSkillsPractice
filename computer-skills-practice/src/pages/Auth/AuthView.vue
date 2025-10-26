@@ -16,8 +16,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import LoginForm from '../components/LoginForm.vue'
-import RegisterForm from '../components/RegisterForm.vue'
+import LoginForm from './components/LoginForm.vue'
+import RegisterForm from './components/RegisterForm.vue'
 
 const router = useRouter()
 const currentView = ref('login')

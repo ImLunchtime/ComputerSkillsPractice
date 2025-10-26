@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import AuthView from '../views/AuthView.vue'
-import UserProfile from '../views/UserProfile.vue'
-import AdminPanel from '../views/AdminPanel.vue'
-import PracticeCenter from '../views/PracticeCenter.vue'
-import CourseView from '../views/CourseView.vue'
-import CourseResult from '../views/CourseResult.vue'
-import DesignLanguage from '../views/DesignLanguage.vue'
+import HomeView from '../pages/Home/HomeView.vue'
+import AuthView from '../pages/Auth/AuthView.vue'
+import UserProfile from '../pages/Profile/UserProfile.vue'
+import AdminPanel from '../pages/Admin/AdminPanel.vue'
+import PracticeCenter from '../pages/Practice/PracticeCenter.vue'
+import CourseView from '../pages/Course/CourseView.vue'
+import CourseResult from '../pages/Course/CourseResult.vue'
+import DesignLanguage from '../pages/DesignLanguage/DesignLanguage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

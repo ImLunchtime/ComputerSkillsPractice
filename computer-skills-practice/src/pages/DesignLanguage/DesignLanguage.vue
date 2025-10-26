@@ -76,7 +76,8 @@
 </template>
 
 <script setup>
-import NavBar from '../components/NavBar.vue'
+import NavBar from '../../components/NavBar.vue'
+import BaseButton from '../../components/BaseButton.vue'
 </script>
 
 <style scoped>

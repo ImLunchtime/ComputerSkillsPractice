@@ -126,7 +126,7 @@
 <script setup>
 import { ref, onMounted, computed, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
-import NavBar from '../components/NavBar.vue'
+import NavBar from '../../components/NavBar.vue'
 
 const router = useRouter()
 const courses = ref([])
