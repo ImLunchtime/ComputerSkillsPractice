@@ -36,7 +36,7 @@
             :class="{ 'selected': selectedFile?.id === file.id, 'target-file': file.isTarget }"
             @click="selectFile(file)"
             @contextmenu.prevent.stop="showFileContextMenu($event, file)"
-            @dblclick="openFile(file)"
+            @dblclick="alert('不要双击打开文件哦~')"
           >
             <div class="file-icon">{{ file.icon }}</div>
             <div class="file-name">{{ file.name }}</div>
@@ -147,6 +147,7 @@
 </template>
 
 <script setup>
+import { IconAddAlert } from '@iconify-prerendered/vue-material-symbols'
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const props = defineProps({
