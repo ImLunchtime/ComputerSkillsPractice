@@ -9,7 +9,6 @@ services:
       - ./server/data:/app/server/data
     environment:
       - NODE_ENV=production
-      - PORT=5173
       # 管理员配置（可选，如果不设置将使用默认值）
       - ADMIN_USERNAME=xtm
       - ADMIN_EMAIL=xtm@tmtec.top
