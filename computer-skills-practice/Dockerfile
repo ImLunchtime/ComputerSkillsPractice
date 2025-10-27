@@ -25,10 +25,6 @@ COPY . .
 RUN mkdir -p /app/server/data
 COPY server/data/courses.json /app/server/data/
 
-# 复制管理员创建脚本
-COPY docker-create-admin.js ./
-COPY docker-admin-setup.sh ./
-RUN chmod +x docker-admin-setup.sh
 
 # 构建前端应用
 RUN npm run build
