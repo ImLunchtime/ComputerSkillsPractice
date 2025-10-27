@@ -11,11 +11,12 @@
     "dev:host": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
+    "preview:host": "vite preview --host",
     "server": "nodemon server/app.js",
     "server:prod": "node server/app.js",
     "start": "concurrently \"npm run server\" \"npm run dev\"",
     "start-public": "concurrently \"npm run server\" \"npm run dev:host\"",
-    "start:prod": "npm run build && concurrently \"npm run server:prod\" \"npm run preview\""
+    "start:prod": "npm run build && concurrently \"npm run server:prod\" \"npm run preview:host\""
   },
   "dependencies": {
     "@iconify-prerendered/vue-material-symbols": "^0.28.1755063979",

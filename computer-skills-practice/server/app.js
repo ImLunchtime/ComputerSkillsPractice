@@ -68,7 +68,8 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../dist')));
   
   // 处理Vue路由（用于生产环境）
-  app.get('*', (req, res) => {
+  // 使用更明确的路径模式，避免path-to-regexp错误
+  app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../dist/index.html'));
   });
 }
