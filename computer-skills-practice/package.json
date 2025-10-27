@@ -12,10 +12,10 @@
     "build": "vite build",
     "preview": "vite preview",
     "server": "nodemon server/app.js",
+    "server:prod": "node server/app.js",
     "start": "concurrently \"npm run server\" \"npm run dev\"",
     "start-public": "concurrently \"npm run server\" \"npm run dev:host\"",
-    "start:prod": "npm run build && node server/app.js",
-    "create-admin": "node server/scripts/create-admin.js"
+    "start:prod": "npm run build && concurrently \"npm run server:prod\" \"npm run preview\""
   },
   "dependencies": {
     "@iconify-prerendered/vue-material-symbols": "^0.28.1755063979",
