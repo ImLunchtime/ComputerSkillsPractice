@@ -181,14 +181,6 @@ async function createAdmin() {
 
 // 运行脚本
 createAdmin();
-        default:
-          password += char;
-          process.stdout.write('*');
-          break;
-      }
-    });
-  });
-}
 
 // 验证邮箱格式
 function isValidEmail(email) {
