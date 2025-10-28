@@ -30,7 +30,7 @@
         <!-- 箭头指示 -->
         <div class="arrow-container">
           <div class="arrow">→</div>
-          <div class="shortcut-hint">点击文本 → Ctrl+A → Ctrl+C → Ctrl+V</div>
+          <div class="shortcut-hint">点击文本 → {{ modifierKey }}+A → {{ modifierKey }}+C → {{ modifierKey }}+V</div>
         </div>
         
         <!-- 右侧编辑器 -->
@@ -50,7 +50,7 @@
               ref="targetTextarea"
               v-model="targetText"
               class="editor-textarea"
-              placeholder="请使用 Ctrl+A 全选，然后 Ctrl+C 复制，最后 Ctrl+V 粘贴到这里..."
+              :placeholder="`请使用 ${modifierKey}+A 全选，然后 ${modifierKey}+C 复制，最后 ${modifierKey}+V 粘贴到这里...`"
               @contextmenu.prevent
               @keydown="handleKeydown"
               @paste="handlePaste"
@@ -67,30 +67,30 @@
         </div>
         <div class="progress-step" :class="{ 'completed': selectAllDetected }">
           <div class="step-number">2</div>
-          <div class="step-text">Ctrl+A 全选</div>
+          <div class="step-text">{{ modifierKey }}+A 全选</div>
         </div>
         <div class="progress-arrow">→</div>
         <div class="progress-step" :class="{ 'completed': copyDetected }">
           <div class="step-number">3</div>
-          <div class="step-text">Ctrl+C 复制</div>
+          <div class="step-text">{{ modifierKey }}+C 复制</div>
         </div>
         <div class="progress-arrow">→</div>
         <div class="progress-step" :class="{ 'completed': pasteDetected }">
           <div class="step-number">4</div>
-          <div class="step-text">Ctrl+V 粘贴</div>
+          <div class="step-text">{{ modifierKey }}+V 粘贴</div>
         </div>
       </div>
       
       <!-- 提示信息 -->
       <div class="mt-6 text-center">
         <div v-if="!selectAllDetected" class="text-gray-500">
-          <p>💡 提示：点击左侧文本框，然后按 <kbd>Ctrl+A</kbd> 全选所有文本</p>
+          <p>💡 提示：点击左侧文本框，然后按 <kbd>{{ modifierKey }}+A</kbd> 全选所有文本</p>
         </div>
         <div v-else-if="selectAllDetected && !copyDetected" class="text-blue-600">
-          <p>✅ 全选成功！现在按 <kbd>Ctrl+C</kbd> 复制选中的文本</p>
+          <p>✅ 全选成功！现在按 <kbd>{{ modifierKey }}+C</kbd> 复制选中的文本</p>
         </div>
         <div v-else-if="copyDetected && !pasteDetected" class="text-orange-600">
-          <p>✅ 复制成功！现在点击右侧文本框，按 <kbd>Ctrl+V</kbd> 粘贴</p>
+          <p>✅ 复制成功！现在点击右侧文本框，按 <kbd>{{ modifierKey }}+V</kbd> 粘贴</p>
         </div>
         <div v-else-if="pasteDetected" class="text-green-600">
           <p>🎉 完美！你已经掌握了全选、复制、粘贴的完整操作流程！</p>
@@ -108,7 +108,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { getModifierKeyDisplay, isModifierKeyPressed } from '@/utils/platform'
 
 const props = defineProps({
   challenge: {
@@ -129,10 +130,13 @@ const pasteDetected = ref(false)
 const sourceTextarea = ref(null)
 const targetTextarea = ref(null)
 
+// 获取当前平台的修饰键名称
+const modifierKey = computed(() => getModifierKeyDisplay())
+
 // 处理键盘事件
 const handleKeydown = (event) => {
-  // 检测 Ctrl+V
-  if (event.ctrlKey && event.key === 'v') {
+  // 检测 Ctrl+V 或 Cmd+V
+  if (isModifierKeyPressed(event) && event.key === 'v') {
     // 粘贴操作会在 paste 事件中处理
     return
   }
@@ -155,8 +159,8 @@ const handlePaste = (event) => {
 
 // 全局键盘事件监听
 const handleGlobalKeydown = (event) => {
-  // 检测 Ctrl+A
-  if (event.ctrlKey && event.key === 'a') {
+  // 检测 Ctrl+A 或 Cmd+A
+  if (isModifierKeyPressed(event) && event.key === 'a') {
     if (document.activeElement === sourceTextarea.value) {
       event.preventDefault()
       sourceTextarea.value.select()
@@ -164,8 +168,8 @@ const handleGlobalKeydown = (event) => {
     }
   }
   
-  // 检测 Ctrl+C
-  if (event.ctrlKey && event.key === 'c') {
+  // 检测 Ctrl+C 或 Cmd+C
+  if (isModifierKeyPressed(event) && event.key === 'c') {
     if (document.activeElement === sourceTextarea.value && selectAllDetected.value) {
       const selection = window.getSelection().toString()
       if (selection.length > 0 || sourceTextarea.value.selectionStart !== sourceTextarea.value.selectionEnd) {

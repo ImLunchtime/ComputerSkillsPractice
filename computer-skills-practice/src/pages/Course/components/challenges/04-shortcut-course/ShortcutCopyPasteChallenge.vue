@@ -33,7 +33,7 @@
         <!-- 箭头指示 -->
         <div class="arrow-container">
           <div class="arrow">→</div>
-          <div class="shortcut-hint">Ctrl+C → Ctrl+V</div>
+          <div class="shortcut-hint">{{ modifierKey }}+C → {{ modifierKey }}+V</div>
         </div>
         
         <!-- 右侧编辑器 -->
@@ -53,7 +53,7 @@
               ref="targetTextarea"
               v-model="targetText"
               class="editor-textarea"
-              placeholder="请使用 Ctrl+C 和 Ctrl+V 将左侧文本复制到这里..."
+              :placeholder="`请使用 ${modifierKey}+C 和 ${modifierKey}+V 将左侧文本复制到这里...`"
               @contextmenu.prevent
               @keydown="handleKeydown"
               @paste="handlePaste"
@@ -67,11 +67,11 @@
         <div v-if="!copyDetected && !pasteDetected" class="text-gray-500">
           <p>💡 提示：</p>
           <p>1. 先选中左侧文本框中的内容</p>
-          <p>2. 按 <kbd>Ctrl+C</kbd> 复制</p>
-          <p>3. 点击右侧文本框，按 <kbd>Ctrl+V</kbd> 粘贴</p>
+          <p>2. 按 <kbd>{{ modifierKey }}+C</kbd> 复制</p>
+          <p>3. 点击右侧文本框，按 <kbd>{{ modifierKey }}+V</kbd> 粘贴</p>
         </div>
         <div v-else-if="copyDetected && !pasteDetected" class="text-blue-600">
-          <p>✅ 复制成功！现在请在右侧文本框中按 <kbd>Ctrl+V</kbd> 粘贴</p>
+          <p>✅ 复制成功！现在请在右侧文本框中按 <kbd>{{ modifierKey }}+V</kbd> 粘贴</p>
         </div>
         <div v-else-if="pasteDetected" class="text-green-600">
           <p>🎉 太棒了！你成功使用快捷键完成了复制粘贴操作！</p>
@@ -89,7 +89,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { getModifierKeyDisplay, isModifierKeyPressed } from '@/utils/platform'
 
 const props = defineProps({
   challenge: {
@@ -109,10 +110,13 @@ const pasteDetected = ref(false)
 const sourceTextarea = ref(null)
 const targetTextarea = ref(null)
 
+// 获取当前平台的修饰键名称
+const modifierKey = computed(() => getModifierKeyDisplay())
+
 // 处理键盘事件
 const handleKeydown = (event) => {
-  // 检测 Ctrl+V
-  if (event.ctrlKey && event.key === 'v') {
+  // 检测 Ctrl+V 或 Cmd+V
+  if (isModifierKeyPressed(event) && event.key === 'v') {
     // 粘贴操作会在 paste 事件中处理
     return
   }
@@ -135,8 +139,8 @@ const handlePaste = (event) => {
 
 // 全局键盘事件监听
 const handleGlobalKeydown = (event) => {
-  // 检测 Ctrl+C
-  if (event.ctrlKey && event.key === 'c') {
+  // 检测 Ctrl+C 或 Cmd+C
+  if (isModifierKeyPressed(event) && event.key === 'c') {
     // 检查当前焦点是否在源文本框
     if (document.activeElement === sourceTextarea.value) {
       const selection = window.getSelection().toString()
