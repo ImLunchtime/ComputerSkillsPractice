@@ -11,6 +11,10 @@ import ContextMenuNewFileChallenge from '@/pages/Course/components/challenges/03
 import ContextMenuOpenChallenge from '@/pages/Course/components/challenges/03-context-menu-course/ContextMenuOpenChallenge.vue'
 import ShortcutCopyPasteChallenge from '@/pages/Course/components/challenges/04-shortcut-course/ShortcutCopyPasteChallenge.vue'
 import ShortcutSelectAllChallenge from '@/pages/Course/components/challenges/04-shortcut-course/ShortcutSelectAllChallenge.vue'
+import AddressBarChallenge from '@/pages/Course/components/challenges/05-url-basics-course/AddressBarChallenge.vue'
+import DomainIdentificationChallenge from '@/pages/Course/components/challenges/05-url-basics-course/DomainIdentificationChallenge.vue'
+import SuffixIdentificationChallenge from '@/pages/Course/components/challenges/05-url-basics-course/SuffixIdentificationChallenge.vue'
+import ValidUrlChallenge from '@/pages/Course/components/challenges/05-url-basics-course/ValidUrlChallenge.vue'
 
 // 组件映射表 - 使用完整路径作为键
 export const componentMap = {
@@ -22,7 +26,11 @@ export const componentMap = {
   'challenges/03-context-menu-course/ContextMenuNewFileChallenge.vue': ContextMenuNewFileChallenge,
   'challenges/03-context-menu-course/ContextMenuOpenChallenge.vue': ContextMenuOpenChallenge,
   'challenges/04-shortcut-course/ShortcutCopyPasteChallenge.vue': ShortcutCopyPasteChallenge,
-  'challenges/04-shortcut-course/ShortcutSelectAllChallenge.vue': ShortcutSelectAllChallenge
+  'challenges/04-shortcut-course/ShortcutSelectAllChallenge.vue': ShortcutSelectAllChallenge,
+  'challenges/05-url-basics-course/AddressBarChallenge.vue': AddressBarChallenge,
+  'challenges/05-url-basics-course/DomainIdentificationChallenge.vue': DomainIdentificationChallenge,
+  'challenges/05-url-basics-course/SuffixIdentificationChallenge.vue': SuffixIdentificationChallenge,
+  'challenges/05-url-basics-course/ValidUrlChallenge.vue': ValidUrlChallenge
 }
 
 /**

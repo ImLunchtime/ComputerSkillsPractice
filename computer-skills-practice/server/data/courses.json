@@ -89,6 +89,39 @@
           "component": "challenges/04-shortcut-course/ShortcutSelectAllChallenge.vue"
         }
       ]
+    },
+    {
+      "id": "url-basics-course",
+      "title": "URL基础",
+      "description": "学习URL的基本概念和结构识别",
+      "icon": "🌐",
+      "difficulty": "初级",
+      "challenges": [
+        {
+          "id": 10,
+          "title": "浏览器地址栏识别",
+          "description": "在浏览器窗口中找出地址栏的位置",
+          "component": "challenges/05-url-basics-course/AddressBarChallenge.vue"
+        },
+        {
+          "id": 11,
+          "title": "URL一级域名识别",
+          "description": "从URL中识别出一级域名部分",
+          "component": "challenges/05-url-basics-course/DomainIdentificationChallenge.vue"
+        },
+        {
+          "id": 12,
+          "title": "URL后缀识别",
+          "description": "从URL中识别出域名后缀部分",
+          "component": "challenges/05-url-basics-course/SuffixIdentificationChallenge.vue"
+        },
+        {
+          "id": 13,
+          "title": "合法URL识别",
+          "description": "从多个选项中识别出合法的URL",
+          "component": "challenges/05-url-basics-course/ValidUrlChallenge.vue"
+        }
+      ]
     }
   ]
 }

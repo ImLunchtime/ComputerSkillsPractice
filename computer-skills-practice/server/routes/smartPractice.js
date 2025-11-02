@@ -147,6 +147,16 @@ const getComponentPath = (courseId, challengeType) => {
       'shortcut-copy-paste': 'challenges/04-shortcut-course/ShortcutCopyPasteChallenge.vue',
       '快捷键全选复制粘贴': 'challenges/04-shortcut-course/ShortcutSelectAllChallenge.vue',
       'shortcut-select-all': 'challenges/04-shortcut-course/ShortcutSelectAllChallenge.vue'
+    },
+    'url-basics-course': {
+      '浏览器地址栏识别': 'challenges/05-url-basics-course/AddressBarChallenge.vue',
+      'address-bar': 'challenges/05-url-basics-course/AddressBarChallenge.vue',
+      'URL一级域名识别': 'challenges/05-url-basics-course/DomainIdentificationChallenge.vue',
+      'domain-identification': 'challenges/05-url-basics-course/DomainIdentificationChallenge.vue',
+      'URL后缀识别': 'challenges/05-url-basics-course/SuffixIdentificationChallenge.vue',
+      'suffix-identification': 'challenges/05-url-basics-course/SuffixIdentificationChallenge.vue',
+      '合法URL识别': 'challenges/05-url-basics-course/ValidUrlChallenge.vue',
+      'valid-url': 'challenges/05-url-basics-course/ValidUrlChallenge.vue'
     }
   };
   
