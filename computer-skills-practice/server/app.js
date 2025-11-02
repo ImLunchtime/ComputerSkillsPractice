@@ -46,6 +46,7 @@ import apiRoutes from './routes/api.js';
 import authRoutes from './routes/auth.js';
 import userRoutes from './routes/users.js';
 import courseRoutes from './routes/coursesSQLite.js'; // 使用SQLite版本
+import smartPracticeRoutes from './routes/smartPractice.js';
 
 // API路由
 app.get('/api/health', (req, res) => {
@@ -56,11 +57,12 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// 使用API路由
+// API路由
 app.use('/api', apiRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/courses', courseRoutes);
+app.use('/api/smart-practice', smartPracticeRoutes);
 
 // 静态文件服务（用于生产环境）
 // 注意：静态文件服务应该在API路由之后，避免冲突

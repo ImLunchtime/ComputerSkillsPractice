@@ -4,6 +4,22 @@
     
     <!-- 功能按钮 -->
     <div class="space-y-3 mb-6">
+      <!-- 智能练习按钮 -->
+      <div 
+        @click="goToSmartPractice" 
+        class="flex items-center p-3 rounded-lg hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 cursor-pointer transition-all duration-200 border border-purple-200 bg-gradient-to-r from-purple-100 to-pink-100"
+      >
+        <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mr-3">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-medium text-gray-800">智能练习</span>
+          <span class="text-xs text-gray-600">AI推荐个性化练习</span>
+        </div>
+      </div>
+      
       <!-- 全部练习按钮 -->
       <div 
         @click="goToPracticeCenter" 
@@ -42,6 +58,10 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 // 方法
+const goToSmartPractice = () => {
+  router.push('/smart-practice')
+}
+
 const goToPracticeCenter = () => {
   router.push('/all-practice')
 }

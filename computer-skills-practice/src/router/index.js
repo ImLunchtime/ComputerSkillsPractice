@@ -7,6 +7,8 @@ import PracticeCenter from '../pages/Practice/PracticeCenter.vue'
 import SimpleUserCenter from '../pages/SimpleUserCenter/SimpleUserCenter.vue'
 import CourseView from '../pages/Course/CourseView.vue'
 import CourseResult from '../pages/Course/CourseResult.vue'
+import SmartPracticeView from '../pages/SmartPracticeView.vue'
+import SmartPracticeResult from '../pages/SmartPracticeResult.vue'
 import DesignLanguage from '../pages/DesignLanguage/DesignLanguage.vue'
 
 const router = createRouter({
@@ -56,6 +58,18 @@ const router = createRouter({
       path: '/practice/:courseId/result',
       name: 'course-result',
       component: CourseResult,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/smart-practice',
+      name: 'smart-practice',
+      component: SmartPracticeView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/smart-practice/result',
+      name: 'smart-practice-result',
+      component: SmartPracticeResult,
       meta: { requiresAuth: true }
     },
     {
