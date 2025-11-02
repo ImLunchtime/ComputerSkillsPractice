@@ -104,7 +104,7 @@
         <div class="text-sm text-green-800">
           <h5 class="font-semibold mb-2">URL基础知识总结：</h5>
           <ul class="list-disc list-inside space-y-1">
-            <li><strong>协议：</strong>指定如何访问资源（http://、https://、ftp://等）</li>
+            <li><strong>协议：</strong>指定如何访问资源（http://、https://）</li>
             <li><strong>域名：</strong>网站的地址标识（如：www.example.com）</li>
             <li><strong>路径：</strong>指向网站内具体页面或资源的路径</li>
             <li><strong>参数：</strong>传递给网页的额外信息（如：?search=keyword）</li>
@@ -137,16 +137,16 @@ const urlSets = [
     { url: 'https://example .com', isValid: false, reason: '域名中包含空格' }
   ],
   [
-    { url: 'ftp://files.example.org', isValid: true, reason: '' },
+    { url: 'https://www.github.com', isValid: true, reason: '' },
     { url: 'https://.com', isValid: false, reason: '缺少域名主体部分' },
-    { url: 'http://github.com/user/repo', isValid: true, reason: '' },
+    { url: 'dsad://shdklhrf', isValid: false, reason: '协议格式错误，应该是http://或https://' },
     { url: 'www.site', isValid: false, reason: '缺少协议和顶级域名' }
   ],
   [
     { url: 'https://stackoverflow.com/questions', isValid: true, reason: '' },
-    { url: 'http://localhost:8080', isValid: true, reason: '' },
-    { url: 'https://example', isValid: false, reason: '缺少顶级域名（如.com）' },
-    { url: 'http://192.168.1.1', isValid: true, reason: '' }
+    { url: 'https://askhdfh', isValid: false, reason: '域名格式错误，缺少有效的顶级域名' },
+    { url: 'htp://example.com', isValid: false, reason: '协议拼写错误，应该是http://' },
+    { url: 'fghj://qwerty.xyz', isValid: false, reason: '协议格式错误，应该是http://或https://' }
   ]
 ]
 
